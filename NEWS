@@ -4,6 +4,7 @@ Changes in PopGenome 2.2.7
 NEW FEATURES:
 - diversity.stats(, keep.site.info=TRUE)
 - split_data_into_GFF_features()
+- laplace smoothing for Bdf
 
 BUG FIXED:
 - GFF parsing: '#' comment lines caused a 'segfault' 
