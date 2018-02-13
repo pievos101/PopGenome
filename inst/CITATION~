@@ -1,0 +1,19 @@
+citHeader("To cite the PopGenome package in publications use:")
+
+citEntry(
+
+entry="Article",
+title = "PopGenome: An Efficient Swiss Army Knife for Population Genomic Analyses in R",
+journal= "Molecular Biology and Evolution",
+year = "2014",
+author = c(person("Bastian", "Pfeifer"),
+person("Ulrich", "Wittelsbuerger"),
+person(c("Sebastian", "E."), "Ramos-Onsins"),
+person(c("Martin", "J."), "Lercher")),
+volume = "31",
+pages = "1929-1936",
+doi = "10.1093/molbev/msu136",
+textVersion = "Pfeifer, B. et al. (2014) PopGenome: An Efficient Swiss Army Knife for Population Genomic Analyses in R. Mol Biol Evol 31(7): 1929-1936. doi: 10.1093/molbev/msu136"
+
+)
+

@@ -1,0 +1,3 @@
+LIBRARY PopGenome.dll
+EXPORTS
+ R_init_PopGenome
