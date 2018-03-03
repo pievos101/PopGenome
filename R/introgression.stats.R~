@@ -261,16 +261,10 @@ if(subsites=="included" & length(bial!=0)){
    	
   # Perform jacknife if requested
   if(block.size[1]!=FALSE){
-        
- 	if(do.D){
 	res        <- D_jacknife(site.D[[xx]], D[xx], block.size=block.size)
-	}
-	if(do.BDF){	
-	res        <- D_jacknife(site.D[[xx]], BDF[xx], block.size=block.size)	
- 	} 
 	D.z[xx]	   <- res$z
-	D.pval[xx] <- res$pval	
- }	
+	D.pval[xx] <- res$pval		
+  }	
 
 
 

@@ -1,14 +1,16 @@
-Changes in PopGenome 2.2.7
+Changes in PopGenome 2.2.8
 ===========================
 
 NEW FEATURES:
+- jacknife for Bdf (introgression.stats())
 - diversity.stats(, keep.site.info=TRUE)
 - split_data_into_GFF_features()
-- laplace smoothing for Bdf
 
 BUG FIXED:
+- jacknife in introgression.stats()
 - GFF parsing: '#' comment lines caused a 'segfault' 
 - regions containing only NaN's crashed neutrality.stats()
+- C-code (crashed calculating pi) 
 
 toDo:
 - set.outgroup on slide objects
