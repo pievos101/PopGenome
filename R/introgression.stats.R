@@ -20,7 +20,7 @@ stop("To calculate the Bd-clr >>D.global<< has to be specified !")
 
 if(do.D){ 
 do.BD     <- FALSE
-do.BDF    <- FALSE
+#do.BDF   <- FALSE
 }
 
 if(do.BD){ 
@@ -31,7 +31,7 @@ do.BDF    <- FALSE
 
 if(do.BDF){ 
 do.BD    <- FALSE
-do.D     <- FALSE
+#do.D     <- FALSE
 }
 
 
@@ -93,6 +93,8 @@ P.Bd_clr <- matrix(NaN,n.region.names,1)
   # ----------------------------------------------
 
   site.D         <- vector("list",n.region.names) # region stats
+  site.BDF       <- vector("list",n.region.names)
+
   change    	 <- object@region.stats
 
  # Bd-CLR
@@ -233,20 +235,20 @@ if(subsites=="included" & length(bial!=0)){
     }
 
     if(do.BDF){
-	    res        <- calc_BDF(bial, populations, outgroup, keep.site.info, dxy.table, l.smooth) 
-    	    BDF[xx]    <- res$D
-            BDF_bayes[xx] <- res$D_bayes
+	    res            <- calc_BDF(bial, populations, outgroup, keep.site.info, dxy.table, l.smooth) 
+    	    BDF[xx]        <- res$D
+            BDF_bayes[xx]  <- res$D_bayes
             alpha_ABBA[xx] <- res$alpha_ABBA
 	    alpha_BABA[xx] <- res$alpha_BABA
-	    beta_BBAA[xx] <- res$beta_BBAA
+	    beta_BBAA[xx]  <- res$beta_BBAA
 		
     	    #f[xx]      <- res$f
             Bd_dir[xx] <- res$Bd_dir
 		
    # fill detailed Slots --------------------------------# 
      if(keep.site.info){	 	
-     site.D[[xx]]  		<- rbind(res$D_site,res$ABBA,res$BABA)
-     rownames(site.D[[xx]])     <- c("D","ABBA","BABA")
+     site.BDF[[xx]]  		<- rbind(res$D_site,res$ABBA,res$BABA)
+     rownames(site.BDF[[xx]])   <- c("BDF","ABBA","BABA")
      }		  
    # ----------------------------------------------------# 
     }
@@ -289,6 +291,7 @@ if(subsites=="included" & length(bial!=0)){
 }
 
  change@D      			<- site.D
+ change@BDF			<- site.BDF	
  object@region.stats            <- change
  rm(change)
  gc()

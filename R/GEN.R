@@ -20,7 +20,9 @@ site.FST               = "list",
 missing.freqs          = "list",
 nuc.diversity.between  = "list",
 nuc.diversity.within   = "list",
-D		       = "list" #Patterson's D
+D		       = "list", #Patterson's D
+BDF		       = "list" #Bdf
+
 ))
 
 
@@ -35,13 +37,13 @@ setMethod("show", "region.stats",
 cat("-----\n")
  cat("SLOTS:\n")
  cat("-----\n")
- out <- data.frame(Slots=c("nucleotide.diversity","haplotype.diversity","haplotype.counts", "minor.allele.freqs","linkage.disequilibrium","biallelic.structure","site.FST","missing.freqs","nuc.diversity.between","nuc.diversity.within","D"),         
+ out <- data.frame(Slots=c("nucleotide.diversity","haplotype.diversity","haplotype.counts", "minor.allele.freqs","linkage.disequilibrium","biallelic.structure","site.FST","missing.freqs","nuc.diversity.between","nuc.diversity.within","D","BDF"),         
                
 
                 Description=c(
-               " Nucleotide diversity","Haplotype diversity","Haplotype distribution","Minor allele frequencies","Linkage disequilibrium","Shared and fixed polymorphisms","SNP-wise FST","Missing nucleotides","dxy","pi_within","Patterson's D"),
+               " Nucleotide diversity","Haplotype diversity","Haplotype distribution","Minor allele frequencies","Linkage disequilibrium","Shared and fixed polymorphisms","SNP-wise FST","Missing nucleotides","dxy","pi_within","Patterson's D","Basic Distance Fraction"),
 
-               Module=c("FST","FST","FST","Detail","Linkage","Detail","Detail","count.unknowns","diversity.stats.between","diversity.stats","introgression.stats"))
+               Module=c("FST","FST","FST","Detail","Linkage","Detail","Detail","count.unknowns","diversity.stats.between","diversity.stats","introgression.stats","introgression.stats"))
  
               
 
