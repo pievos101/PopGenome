@@ -39,8 +39,8 @@ for(zz in 1:repeatlength){
 #after Martin (two tailed z-test)
 D_sd  <- sd(D_sim,na.rm=TRUE)
 D_err <- D_sd/sqrt(repeatlength)
-D_Z <- D.base / D_err
-D_p <- 2*pnorm(-abs(D_Z))
+D_Z   <- D.base / D_err
+D_p   <- 2*pnorm(-abs(D_Z))
 
 #after Eaton and Ree 2013 
 #z    <- abs(D.base/sd(D_sim,na.rm=TRUE))
