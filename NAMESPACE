@@ -35,6 +35,8 @@ exportMethods(introgression.stats)
 exportMethods(jack.knife.transform)
 exportMethods(diversity.stats.between)
 exportMethods(calc.fixed.shared)
+exportMethods(weighted.jackknife)
+
 
 exportMethods(F_ST.stats.2)
 exportMethods(get.sum.data)

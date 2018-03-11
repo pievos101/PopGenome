@@ -21,7 +21,7 @@ do.BDF=TRUE,
 keep.site.info=TRUE,
 block.size=FALSE,
 do.RNDmin=FALSE,
-l.smooth=TRUE)
+l.smooth=FALSE)
 
 }
 
