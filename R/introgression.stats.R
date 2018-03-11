@@ -35,9 +35,6 @@ do.BD    <- FALSE
 }
 
 
-
-
-
   region.names                 <- object@region.names
   n.region.names               <- length(region.names)
   if(object@big.data){region.names <- NULL} # because of memory space
@@ -69,6 +66,8 @@ P.Bd_clr <- matrix(NaN,n.region.names,1)
   RNDmin <- matrix(NaN,n.region.names,1)
   D.z    <- matrix(NaN,n.region.names,1) # jacknife
   D.pval <- matrix(NaN,n.region.names,1) # jacknife
+  BDF.z    <- matrix(NaN,n.region.names,1) # jacknife
+  BDF.pval <- matrix(NaN,n.region.names,1) # jacknife
 #--------------------------------------------------
 
   # Names ----------------------------------------
@@ -273,12 +272,14 @@ if(subsites=="included" & length(bial!=0)){
         
  	if(do.D){
 	res        <- D_jacknife(site.D[[xx]], D[xx], block.size=block.size)
-	}
-	if(do.BDF){	
-	res        <- D_jacknife(site.D[[xx]], BDF[xx], block.size=block.size)	
- 	} 
 	D.z[xx]	   <- res$z
 	D.pval[xx] <- res$pval	
+	}
+	if(do.BDF){	
+	res          <- D_jacknife(site.BDF[[xx]], BDF[xx], block.size=block.size)	
+	BDF.z[xx]    <- res$z
+	BDF.pval[xx] <- res$pval	
+	}
  }	
 
 
@@ -309,6 +310,9 @@ if(subsites=="included" & length(bial!=0)){
  object@f        <- f
  object@D.z      <- D.z
  object@D.pval   <- D.pval
+ object@BDF.z      <- BDF.z
+ object@BDF.pval   <- BDF.pval
+
  object@RNDmin   <- RNDmin
  
  return(object)

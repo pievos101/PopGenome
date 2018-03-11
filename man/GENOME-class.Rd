@@ -170,7 +170,9 @@
     \item{\code{Bd_clr}:}{...}
     \item{\code{Bd_dir}:}{...}
     \item{\code{D.pval}:}{...}
-    \item{\code{D.z}:}{...}    
+    \item{\code{D.z}:}{...}  
+    \item{\code{BDF.pval}:}{...}
+    \item{\code{BDF.z}:}{...}      
     \item{\code{P.Bd_clr}:}{...}    
     \item{\code{RNDmin}:}{...}
   }

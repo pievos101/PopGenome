@@ -68,6 +68,10 @@ The following slots will be modified in the \code{"GENOME"}  object \cr
 
  3.\tab \code{BDF}	            \tab [x]   \tab Bd-fraction \cr
  4.\tab \code{RNDmin}	            \tab [x]   \tab RNDmin \cr
+ 5.\tab \code{D.z}	            \tab [x]   \tab z values (jackknife) \cr
+ 6.\tab \code{D.pval}	            \tab [x]   \tab P values (jackknife) \cr
+ 7.\tab \code{BDF.z}	            \tab [x]   \tab z values (jackknife) \cr
+ 8.\tab \code{BDF.pval}	            \tab [x]   \tab P values (jackknife) \cr
  
           }
 
