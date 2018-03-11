@@ -16,8 +16,8 @@
 
 \S4method{introgression.stats}{GENOME}(object,
 subsites=FALSE,
-do.D=FALSE,
-do.BDF=FALSE,
+do.D=TRUE,
+do.BDF=TRUE,
 keep.site.info=TRUE,
 block.size=FALSE,
 do.RNDmin=FALSE,
