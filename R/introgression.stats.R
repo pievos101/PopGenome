@@ -1,6 +1,13 @@
-setGeneric("introgression.stats", function(object,subsites=FALSE,do.D=FALSE, do.BD=FALSE, do.BDF=FALSE, keep.site.info=TRUE, block.size=FALSE, dxy.table=FALSE, D.global=FALSE, do.CLR=FALSE, dgt=2, do.RNDmin=FALSE, lambda=1, l.smooth=FALSE) standardGeneric("introgression.stats"))
+setGeneric("introgression.stats", function(object, subsites=FALSE, do.D=FALSE, do.BDF=FALSE, keep.site.info=TRUE, block.size=FALSE, do.RNDmin=FALSE, l.smooth=TRUE) standardGeneric("introgression.stats"))
 
-setMethod("introgression.stats","GENOME",function(object,subsites,do.D, do.BD, do.BDF, keep.site.info,block.size,dxy.table, D.global, do.CLR, dgt, do.RNDmin, lambda, l.smooth){
+setMethod("introgression.stats","GENOME",function(object, subsites, do.D, do.BDF, keep.site.info, block.size, do.RNDmin, l.smooth){
+
+do.BD=FALSE
+dxy.table=FALSE
+D.global=FALSE
+do.CLR=FALSE
+dgt=FALSE
+lambda=FALSE
 
   
 if(do.CLR){

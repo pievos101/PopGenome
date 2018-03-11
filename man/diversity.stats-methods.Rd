@@ -14,7 +14,7 @@
 
 \usage{
 
-\S4method{diversity.stats}{GENOME}(object,new.populations=FALSE,subsites=FALSE,pi=FALSE)
+\S4method{diversity.stats}{GENOME}(object,new.populations=FALSE,subsites=FALSE,pi=FALSE, keep.site.info=TRUE)
 
 }
 
@@ -37,7 +37,9 @@
   } 
 
   \item{pi}{Nei's calculation of pi}
+  \item{keep.site.info}{stores site specific values in \code{GENOME.class@region.stats}}
 
+  
 }
 
 
