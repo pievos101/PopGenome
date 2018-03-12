@@ -5,8 +5,8 @@ ABBA_sites 	<- Dvalues[2,]
 BABA_sites	<- Dvalues[3,]
 
 D_sites    <- D_sites[!is.na(D_sites)]
-ABBA_sites <- ABBA_sites[!is.na(ABBA_sites)]
-BABA_sites <- BABA_sites[!is.na(BABA_sites)]
+ABBA_sites <- ABBA_sites[!is.na(D_sites)]
+BABA_sites <- BABA_sites[!is.na(D_sites)]
  
 
 n.sites         <- length(D_sites)
