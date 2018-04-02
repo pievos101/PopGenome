@@ -191,6 +191,10 @@ for (xx in 1:length(cod.pos)){
 ## Reading the reference chromosome
 file.info <- .Call("get_dim_fasta",ref.chr[xyz])
 
+if(length(file.info)==0){
+stop("Cannot read in reference FASTA file !")
+}
+
 gc()
 #print(file.info)
 
