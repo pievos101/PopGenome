@@ -36,6 +36,12 @@ for(int x = 0; x < n_nucs[0]; x++){
   FILE *fp;
   fp = fopen( file ,"r");
 
+  if(fp==NULL) {
+    Rprintf("Cannot open file.\n");
+    UNPROTECT(1);
+    return R_NilValue;
+  }
+
   // check rows of ff matrix
   // ##################################
   while((ch = fgetc( fp )) != EOF) {
