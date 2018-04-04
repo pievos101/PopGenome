@@ -30,8 +30,8 @@ for(zz in 1:repeatlength){
         end 	   <- ((zz-1) * jump + width) 
         window	   <- start:end 
 
-	ABBA       <- ABBA_sites[window]
-	BABA	   <- BABA_sites[window]
+	ABBA       <- ABBA_sites[-window]
+	BABA	   <- BABA_sites[-window]
 	D_sim[zz]  <- ( sum(ABBA, na.rm=TRUE) - sum(BABA, na.rm=TRUE) ) / ( sum(ABBA, na.rm=TRUE) + sum(BABA, na.rm=TRUE) )
 
 }
