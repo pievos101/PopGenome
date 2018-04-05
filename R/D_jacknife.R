@@ -8,6 +8,17 @@ D_sites    <- D_sites[!is.na(D_sites)]
 ABBA_sites <- ABBA_sites[!is.na(D_sites)]
 BABA_sites <- BABA_sites[!is.na(D_sites)]
  
+# If block.size is not specified calc the traditional Z-test
+if(!block.size){
+#after Martin (two tailed z-test)
+D_sd  <- sd(D_sites,na.rm=TRUE)
+D_err <- D_sd/sqrt(length(D_sites))
+D_Z   <- D.base / D_err
+D_p   <- 2*pnorm(-abs(D_Z))
+return(list(z=D_Z, pval=D_p))
+}
+###############
+
 
 n.sites         <- length(D_sites)
 width           <- block.size
@@ -43,8 +54,8 @@ D_Z   <- D.base / D_err
 D_p   <- 2*pnorm(-abs(D_Z))
 
 #after Eaton and Ree 2013 
-#z    <- abs(D.base/sd(D_sim,na.rm=TRUE))
-#pval <- 2 * (1 - pnorm(z)) 
+#D_Z    <- abs(D.base/sd(D_sim,na.rm=TRUE))
+#D_p    <- 2 * (1 - pnorm(D_Z)) 
 
 
 return(list(z=D_Z, pval=D_p))

@@ -1,7 +1,7 @@
-setGeneric("weighted.jackknife", function(object, do.D=TRUE, do.BDF=TRUE, per.region=FALSE) standardGeneric("weighted.jackknife"))
+setGeneric("weighted.jackknife", function(object, do.D=TRUE, do.BDF=TRUE, per.region=FALSE, block.size=1) standardGeneric("weighted.jackknife"))
  setMethod("weighted.jackknife", "GENOME",
 
- function(object, do.D, do.BDF, per.region){
+ function(object, do.D, do.BDF, per.region, block.size){
   
 
 region.names                 <- object@region.names
@@ -32,12 +32,12 @@ if(per.region){ #drop-one jackknife
   for(xx in 1:n.region.names){
 
 	if(do.D){
-	res        <- D_jacknife(site.D[[xx]], D[xx], block.size=1)
+	res        <- D_jacknife(site.D[[xx]], D[xx], block.size=block.size)
 	D.z[xx]	   <- res$z
 	D.pval[xx] <- res$pval	
 	}
 	if(do.BDF){	
-	res          <- D_jacknife(site.BDF[[xx]], BDF[xx], block.size=1)	
+	res          <- D_jacknife(site.BDF[[xx]], BDF[xx], block.size=block.size)	
 	BDF.z[xx]    <- res$z
 	BDF.pval[xx] <- res$pval	
 	}
