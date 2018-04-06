@@ -20,6 +20,7 @@ if(per.region){ #drop-one jackknife
   D.pval   <- matrix(NaN,n.region.names,1) # jacknife
   BDF.z    <- matrix(NaN,n.region.names,1) # jacknife
   BDF.pval <- matrix(NaN,n.region.names,1) # jacknife
+  BDF.SE   <- matrix(NaN,n.region.names,1) # jacknife
 
   # get site specific values 
   site.D    <- object@region.stats@D
@@ -149,6 +150,7 @@ object@BDF.z    <- as.matrix(BDF/SE_BDF)
 object@BDF.pval <- as.matrix(2*pnorm(-abs(object@BDF.z)))
 object@D.z      <- as.matrix(D/SE_D)
 object@D.pval   <- as.matrix(2*pnorm(-abs(object@D.z)))
+object@BDF.SE   <- as.matrix(SE_BDF)
 
 return(object)
 

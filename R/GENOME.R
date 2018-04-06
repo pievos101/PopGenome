@@ -129,7 +129,8 @@ RNDmin 		       =   "matrix",
 D.z		       =   "matrix",              # introgression slots
 D.pval		       =   "matrix",
 BDF.z		       =   "matrix",              # introgression slots
-BDF.pval	       =   "matrix",                            
+BDF.pval	       =   "matrix",
+BDF.SE		       =   "matrix",                            
 jack.knife             =   "logical",
 missing.freqs          =   "matrix",
 
