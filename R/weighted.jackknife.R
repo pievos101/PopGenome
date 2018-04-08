@@ -151,6 +151,7 @@ object@BDF.pval <- as.matrix(2*pnorm(-abs(object@BDF.z)))
 object@D.z      <- as.matrix(D/SE_D)
 object@D.pval   <- as.matrix(2*pnorm(-abs(object@D.z)))
 object@BDF.SE   <- as.matrix(SE_BDF)
+object@D.SE     <- as.matrix(SE_D)
 
 return(object)
 
