@@ -66,8 +66,8 @@ modification <- FALSE
 			modus <-1
 			print("You've put in a codominant set of data")
 		} else {
-			print("You've put in a dominant set of data, call the other function")
-			break
+			stop("You've put in a dominant set of data, call the other function")
+			#break
 		}
 
 		 population <- import_file(modus, name, locnum, popnum) # extract dataset from file	

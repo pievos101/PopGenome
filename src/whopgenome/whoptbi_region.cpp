@@ -75,11 +75,15 @@ bool			whop_tabix::setRegion( const char* tid, int begin, int end )
 {
 	//
 	//
-	if( this == 0 )
+	// quick fix for CRAN #FIXME (commented out)
+	/*
+        if( this == 0 )
 	{
 		Rprintf("(!!) whop_tabix::setregion called on this==0!\n");
 		return 0;
 	}
+	*/
+
 	//
 	//
 	if( tabix == 0 )

@@ -43,6 +43,7 @@
 \alias{count.unknowns}
 \alias{calc.fixed.shared}
 \alias{set.filter}
+\alias{weighted.jackknife}
 
 
 
@@ -171,8 +172,10 @@
     \item{\code{Bd_dir}:}{...}
     \item{\code{D.pval}:}{...}
     \item{\code{D.z}:}{...}  
+    \item{\code{D.SE}:}{...}
     \item{\code{BDF.pval}:}{...}
-    \item{\code{BDF.z}:}{...}      
+    \item{\code{BDF.z}:}{...}
+    \item{\code{BDF.SE}:}{...}
     \item{\code{P.Bd_clr}:}{...}    
     \item{\code{RNDmin}:}{...}
   }
@@ -223,6 +226,7 @@
     \item{count.unknowns}{Calculates the frequencies of missing nucleotides}
     \item{calc.fixed.shared}{Calculates the frequencies of missing nucleotides}
     \item{set.filter}{SNP Filtering}
+    \item{weighted.jackknife}{weighted jackknife}
  
   }
 }

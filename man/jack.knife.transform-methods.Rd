@@ -25,7 +25,7 @@
 \arguments{
 
   \item{object}{an object of class \code{"GENOME"}}
-  \item{width}{window size. default:\code{7}}11
+  \item{width}{window size. default:\code{7}}
   \item{jump}{jump size. default:\code{5}}
   \item{type}{\code{1} scan only biallelic positions (SNPs), \code{2} scan the genome. default:\code{1}}
   \item{start.pos}{start position}

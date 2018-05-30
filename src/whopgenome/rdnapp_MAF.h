@@ -239,9 +239,10 @@ bool	determineAlignmentDimensionsMAF( unsigned int &numnucleotides, unsigned int
 	}//while not eof
 	
 	//
+	/* commented out due to CRAN warnings #FIXME
 	ONDBG Rprintf("MAF File containing %d distinct sequences; total alignment length = %d\n",numsamples,numnucleotides);
 	numsamples=numsamples;
-	
+	*/
 	//
 	return true;
 }
