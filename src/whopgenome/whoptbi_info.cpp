@@ -112,7 +112,7 @@ bool			whop_tabix::parseHeader( ParseFunctor &f )
 	
 	//	validate arguments
 	//
-	/* commented out due to CRAN warnings #FIXME	
+	// commented out due to CRAN warnings #FIXME	start
 	if( this == 0 )
 	{
 		Rprintf("whop_tabix::parseheader : NULL vcf*!\n");
@@ -123,7 +123,7 @@ bool			whop_tabix::parseHeader( ParseFunctor &f )
 		Rprintf("whop_tabix::parseheader : NULL functor!\n");
 		return false;
 	}
-	*/
+	// end fixme 
 	// end of quick fix CRAN  
 
 	//
