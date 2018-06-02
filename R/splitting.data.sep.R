@@ -297,8 +297,14 @@ if(!is.list(positions)){
      }
     }
  
+    #FIXME
     if(!is.list(positions) & object@snp.data & can_con){
 
+	
+     # some regions might have no subsite regions --> delete
+     del          <- which(N.subsites==0)
+     REGION.NAMES <- REGION.NAMES[-del]
+     
      ### Progress
      progr <- progressBar()
      ###
@@ -327,7 +333,7 @@ if(!is.list(positions)){
         #print(gene.pos.ids)
 
         if(zz==(gene.pos.ids[count,2]+1)){ # end of chunk
-           JUMP       <- JUMP    + N.Bial.Sites[count]  
+           JUMP       <- JUMP  + N.Bial.Sites[count]  
            count      <- count + 1
            bial.sites <- XXX@biallelic.sites[[1]][bial.pos.ids[count,1]:bial.pos.ids[count,2]] # next chunk        
         } 
