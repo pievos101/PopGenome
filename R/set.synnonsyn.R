@@ -13,7 +13,7 @@ stop("No GFF file was read in !")
 
 
 for (xyz in 1:length(ref.chr)){
-# erstmal nur fuer ein Chunk
+
 
 Coding.matrix            <- object@region.data@Coding.matrix2[[xyz]][,] # weil ff object, 2 because (fitting GFF)
 biallelic.sites2         <- object@region.data@biallelic.sites2[[xyz]]  # with respect to the refernce positions
@@ -24,8 +24,7 @@ REV                      <- as.logical(REV)
 CodingSNPS               <- object@region.data@CodingSNPS[[xyz]]
 
 if(sum(CodingSNPS)==0){
-warning("No coding SNPs in this region !")
-print(object@region.names[xyz])
+cat("WARNING:: No coding SNPs in this region !\n","Region::",object@region.names[xyz],"\n")
 next
 }
 
@@ -192,8 +191,10 @@ for (xx in 1:length(cod.pos)){
 file.info <- .Call("get_dim_fasta",ref.chr[xyz])
 
 if(length(file.info)==0){
-stop("Cannot read in reference FASTA file !")
+cat("WARNING:: Cannot read in reference FASTA file !!! \n","File::",ref.chr[xyz],"\n")
+next
 }
+
 
 gc()
 #print(file.info)

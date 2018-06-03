@@ -236,6 +236,13 @@ methods <- "DATA"
     # print(liste3)             
     #treffer      <- match(gff_liste3,liste3)
     treffer       <- match(liste3,gff_liste3)
+
+    ### Print a warning when GFF files are missing 
+    if(any(is.na(treffer))){
+	cat("WARNING:: Could not find GFF files for:\n")
+        cat(liste3[is.na(treffer)],"\n",sep=",")
+    }
+
     #print(liste3)
     #print(gff_liste3)
 	
