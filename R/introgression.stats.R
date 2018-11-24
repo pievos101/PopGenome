@@ -1,6 +1,6 @@
-setGeneric("introgression.stats", function(object, subsites=FALSE, do.D=TRUE, do.BDF=TRUE, keep.site.info=TRUE, block.size=FALSE, do.RNDmin=FALSE, l.smooth=FALSE) standardGeneric("introgression.stats"))
+setGeneric("introgression.stats", function(object, subsites=FALSE, do.D=TRUE, do.df=TRUE, keep.site.info=TRUE, block.size=FALSE, do.RNDmin=FALSE, l.smooth=FALSE) standardGeneric("introgression.stats"))
 
-setMethod("introgression.stats","GENOME",function(object, subsites, do.D, do.BDF, keep.site.info, block.size, do.RNDmin, l.smooth){
+setMethod("introgression.stats","GENOME",function(object, subsites, do.D, do.df, keep.site.info, block.size, do.RNDmin, l.smooth){
 
 do.BD=FALSE
 dxy.table=FALSE
@@ -20,16 +20,16 @@ stop("To calculate the Bd-clr >>D.global<< has to be specified !")
 
 if(do.D){ 
 do.BD     <- FALSE
-#do.BDF   <- FALSE
+#do.df   <- FALSE
 }
 
 if(do.BD){ 
 do.D      <- FALSE
-do.BDF    <- FALSE
+do.df    <- FALSE
 #do.RNDmin <- FALSE
 }
 
-if(do.BDF){ 
+if(do.df){ 
 do.BD    <- FALSE
 #do.D     <- FALSE
 }
@@ -52,8 +52,8 @@ keep.site.info=TRUE
 # init
   D      <- matrix(NaN,n.region.names,1)
   BD     <- matrix(NaN,n.region.names,1)
-  BDF    <- matrix(NaN,n.region.names,1)
-  BDF_bayes  <- matrix(NaN,n.region.names,1)
+  df    <- matrix(NaN,n.region.names,1)
+  df_bayes  <- matrix(NaN,n.region.names,1)
   alpha_ABBA  <- matrix(NaN,n.region.names,1)
   alpha_BABA  <- matrix(NaN,n.region.names,1)
   beta_BBAA  <- matrix(NaN,n.region.names,1)
@@ -66,8 +66,8 @@ P.Bd_clr <- matrix(NaN,n.region.names,1)
   RNDmin <- matrix(NaN,n.region.names,1)
   D.z    <- matrix(NaN,n.region.names,1) # jacknife
   D.pval <- matrix(NaN,n.region.names,1) # jacknife
-  BDF.z    <- matrix(NaN,n.region.names,1) # jacknife
-  BDF.pval <- matrix(NaN,n.region.names,1) # jacknife
+  df.z    <- matrix(NaN,n.region.names,1) # jacknife
+  df.pval <- matrix(NaN,n.region.names,1) # jacknife
 #--------------------------------------------------
 
   # Names ----------------------------------------
@@ -75,10 +75,10 @@ P.Bd_clr <- matrix(NaN,n.region.names,1)
   colnames(D)       <- "D statistic"
   rownames(BD)      <- region.names
   colnames(BD)      <- "BD statistic"
-  rownames(BDF)     <- region.names
-  colnames(BDF)     <- "BDF statistic"
-  rownames(BDF_bayes)     <- region.names
-  colnames(BDF_bayes)     <- "BDF bayes factor"
+  rownames(df)     <- region.names
+  colnames(df)     <- "df statistic"
+  rownames(df_bayes)     <- region.names
+  colnames(df_bayes)     <- "df bayes factor"
   rownames(Bd_dir)  <- region.names
   colnames(Bd_dir)  <- "Direction"
   rownames(Bd_clr)  <- region.names
@@ -92,7 +92,7 @@ P.Bd_clr <- matrix(NaN,n.region.names,1)
   # ----------------------------------------------
 
   site.D         <- vector("list",n.region.names) # region stats
-  site.BDF       <- vector("list",n.region.names)
+  site.df       <- vector("list",n.region.names)
 
   change    	 <- object@region.stats
 
@@ -233,10 +233,10 @@ if(subsites=="included" & length(bial!=0)){
    # ----------------------------------------------------# 
     }
 
-    if(do.BDF){
-	    res            <- calc_BDF(bial, populations, outgroup, keep.site.info, dxy.table, l.smooth) 
-    	    BDF[xx]        <- res$D
-            BDF_bayes[xx]  <- res$D_bayes
+    if(do.df){
+	    res            <- calc_df(bial, populations, outgroup, keep.site.info, dxy.table, l.smooth) 
+    	    df[xx]        <- res$D
+            df_bayes[xx]  <- res$D_bayes
             alpha_ABBA[xx] <- res$alpha_ABBA
 	    alpha_BABA[xx] <- res$alpha_BABA
 	    beta_BBAA[xx]  <- res$beta_BBAA
@@ -246,8 +246,8 @@ if(subsites=="included" & length(bial!=0)){
 		
    # fill detailed Slots --------------------------------# 
      if(keep.site.info){	 	
-     site.BDF[[xx]]  		<- rbind(res$D_site,res$ABBA,res$BABA)
-     rownames(site.BDF[[xx]])   <- c("BDF","ABBA","BABA")
+     site.df[[xx]]  		<- rbind(res$D_site,res$ABBA,res$BABA)
+     rownames(site.df[[xx]])   <- c("df","ABBA","BABA")
      }		  
    # ----------------------------------------------------# 
     }
@@ -275,10 +275,10 @@ if(subsites=="included" & length(bial!=0)){
 	D.z[xx]	   <- res$z
 	D.pval[xx] <- res$pval	
 	}
-	if(do.BDF){	
-	res          <- D_jacknife(site.BDF[[xx]], BDF[xx], block.size=block.size)	
-	BDF.z[xx]    <- res$z
-	BDF.pval[xx] <- res$pval	
+	if(do.df){	
+	res          <- D_jacknife(site.df[[xx]], df[xx], block.size=block.size)	
+	df.z[xx]    <- res$z
+	df.pval[xx] <- res$pval	
 	}
  }	
 
@@ -292,14 +292,14 @@ if(subsites=="included" & length(bial!=0)){
 }
 
  change@D      			<- site.D
- change@BDF			<- site.BDF	
+ change@df			<- site.df	
  object@region.stats            <- change
  rm(change)
  gc()
  object@D        <- D
  object@BD       <- BD
- object@BDF      <- BDF
- object@BDF_bayes      <- BDF_bayes
+ object@df       <- df
+ object@df_bayes      <- df_bayes
  object@alpha_ABBA     <- alpha_ABBA
  object@alpha_BABA     <- alpha_BABA
  object@beta_BBAA      <- beta_BBAA
@@ -310,8 +310,8 @@ if(subsites=="included" & length(bial!=0)){
  object@f        <- f
  object@D.z      <- D.z
  object@D.pval   <- D.pval
- object@BDF.z      <- BDF.z
- object@BDF.pval   <- BDF.pval
+ object@df.z      <- df.z
+ object@df.pval   <- df.pval
 
  object@RNDmin   <- RNDmin
  

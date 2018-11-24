@@ -17,7 +17,7 @@
 \S4method{introgression.stats}{GENOME}(object,
 subsites=FALSE,
 do.D=TRUE,
-do.BDF=TRUE,
+do.df=TRUE,
 keep.site.info=TRUE,
 block.size=FALSE,
 do.RNDmin=FALSE,
@@ -43,7 +43,7 @@ l.smooth=FALSE)
   } 
 
   \item{do.D}{Pattersons D and Martin's f statistic}
-  \item{do.BDF}{Bd-fraction}
+  \item{do.df}{Bd-fraction}
   \item{keep.site.info}{keep site specific values (\code{GENOME.class@region.stats})}
   \item{block.size}{the block size for jackknife}
   \item{do.RNDmin}{RNDmin (Rosenzweig, 2016)}
@@ -66,12 +66,12 @@ The following slots will be modified in the \code{"GENOME"}  object \cr
           1.\tab \code{D}	            \tab [1;eq. 2]   \tab Pattersons D statistic \cr
 	  2.\tab \code{f}	            \tab [2]   \tab f statistic \cr
 
- 3.\tab \code{BDF}	            \tab [x]   \tab Bd-fraction \cr
+ 3.\tab \code{df}	            \tab [x]   \tab Bd-fraction \cr
  4.\tab \code{RNDmin}	            \tab [x]   \tab RNDmin \cr
  5.\tab \code{D.z}	            \tab [x]   \tab z values (jackknife) \cr
  6.\tab \code{D.pval}	            \tab [x]   \tab P values (jackknife) \cr
- 7.\tab \code{BDF.z}	            \tab [x]   \tab z values (jackknife) \cr
- 8.\tab \code{BDF.pval}	            \tab [x]   \tab P values (jackknife) \cr
+ 7.\tab \code{df.z}	            \tab [x]   \tab z values (jackknife) \cr
+ 8.\tab \code{df.pval}	            \tab [x]   \tab P values (jackknife) \cr
  
           }
 
@@ -97,9 +97,9 @@ f is the fraction of the genome that is admixed [2].
 # show the result:
 # GENOME.class@D
 # GENOME.class@f
-# GENOME.class <- introgression.stats(GENOME.class, do.BDF=TRUE)
+# GENOME.class <- introgression.stats(GENOME.class, do.df=TRUE)
 # show the result:
-# GENOME.class@BDF
+# GENOME.class@df
 }
 
 

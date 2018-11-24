@@ -1,7 +1,7 @@
 Package: PopGenome
 Type: Package
 Title: An Efficient Swiss Army Knife for Population Genomic Analyses
-Version: 2.6.6
+Version: 2.7.0
 Date: 2018-05-18
 Authors@R: c(	person("Bastian", "Pfeifer", role = c("aut", "cre"), email = "bastianxpfeifer@gmail.com"),
 				person("Ulrich", "Wittelsbuerger", role = "ctb"),

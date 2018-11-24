@@ -1,7 +1,7 @@
-setGeneric("weighted.jackknife", function(object, do.D=TRUE, do.BDF=TRUE, per.region=FALSE, block.size=1) standardGeneric("weighted.jackknife"))
+setGeneric("weighted.jackknife", function(object, do.D=TRUE, do.df=TRUE, per.region=FALSE, block.size=1) standardGeneric("weighted.jackknife"))
  setMethod("weighted.jackknife", "GENOME",
 
- function(object, do.D, do.BDF, per.region, block.size){
+ function(object, do.D, do.df, per.region, block.size){
   
 
 region.names                 <- object@region.names
@@ -9,7 +9,7 @@ n.region.names               <- length(region.names)
 
 #n.region.names=10
 
-BDF <- object@BDF
+df  <- object@df
 D   <- object@D
 
 
@@ -18,13 +18,13 @@ if(per.region){ #drop-one jackknife
   # init 
   D.z      <- matrix(NaN,n.region.names,1) # jacknife
   D.pval   <- matrix(NaN,n.region.names,1) # jacknife
-  BDF.z    <- matrix(NaN,n.region.names,1) # jacknife
-  BDF.pval <- matrix(NaN,n.region.names,1) # jacknife
-  BDF.SE   <- matrix(NaN,n.region.names,1) # jacknife
+  df.z    <- matrix(NaN,n.region.names,1) # jacknife
+  df.pval <- matrix(NaN,n.region.names,1) # jacknife
+  df.SE   <- matrix(NaN,n.region.names,1) # jacknife
 
   # get site specific values 
   site.D    <- object@region.stats@D
-  site.BDF  <- object@region.stats@BDF
+  site.df  <- object@region.stats@df
 
 ## PROGRESS #########################
  progr <- progressBar()
@@ -37,10 +37,10 @@ if(per.region){ #drop-one jackknife
 	D.z[xx]	   <- res$z
 	D.pval[xx] <- res$pval	
 	}
-	if(do.BDF){	
-	res          <- D_jacknife(site.BDF[[xx]], BDF[xx], block.size=block.size)	
-	BDF.z[xx]    <- res$z
-	BDF.pval[xx] <- res$pval	
+	if(do.df){	
+	res          <- D_jacknife(site.df[[xx]], df[xx], block.size=block.size)	
+	df.z[xx]    <- res$z
+	df.pval[xx] <- res$pval	
 	}
 
  ## PROGRESS #######################################################
@@ -49,8 +49,8 @@ if(per.region){ #drop-one jackknife
 
   }
 
-object@BDF.z    <- BDF.z
-object@BDF.pval <- BDF.pval
+object@df.z    <- df.z
+object@df.pval <- df.pval
 object@D.z      <- D.z
 object@D.pval   <- D.pval
 
@@ -60,42 +60,42 @@ return(object)
 
 if(!per.region){ # weighted jackknife 
 
-# Calculate the global D and BDF 
+# Calculate the global D and df 
 D_ABBA <- sum( sapply(object@region.stats@D, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[2,], na.rm=TRUE))}}), na.rm=TRUE)
 D_BABA <- sum( sapply(object@region.stats@D, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[3,], na.rm=TRUE))}}), na.rm=TRUE)
 
-BDF_ABBA <- sum( sapply(object@region.stats@BDF, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[2,], na.rm=TRUE))}}), na.rm=TRUE)
-BDF_BABA <- sum( sapply(object@region.stats@BDF, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[3,], na.rm=TRUE))}}), na.rm=TRUE)
+df_ABBA <- sum( sapply(object@region.stats@df, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[2,], na.rm=TRUE))}}), na.rm=TRUE)
+df_BABA <- sum( sapply(object@region.stats@df, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[3,], na.rm=TRUE))}}), na.rm=TRUE)
 
 D   <- (D_ABBA-D_BABA)/(D_ABBA+D_BABA)
-BDF <- (BDF_ABBA-BDF_BABA)/(BDF_ABBA+BDF_BABA)
+df <- (df_ABBA-df_BABA)/(df_ABBA+df_BABA)
 
 #print(D)
-#print(BDF)
+#print(df)
 
 #get informative sites per region
-BDF.valid <- sapply(object@region.stats@BDF, function(x){if(length(x)==0){return(NaN)}else{return(sum(!is.na(x[1,])))}})
+df.valid <- sapply(object@region.stats@df, function(x){if(length(x)==0){return(NaN)}else{return(sum(!is.na(x[1,])))}})
 D.valid   <- sapply(object@region.stats@D, function(x){if(length(x)==0){return(NaN)}else{return(sum(!is.na(x[1,])))}})
 
-BDF_M     <- sum(BDF.valid, na.rm=TRUE)
+df_M     <- sum(df.valid, na.rm=TRUE)
 D_M       <- sum(D.valid, na.rm=TRUE)
 
-#print(BDF_M)
+#print(df_M)
 #print(D_M)
 
-BDF.valid <- BDF.valid/BDF_M
+df.valid <- df.valid/df_M
 D.valid   <- D.valid/D_M
 
 
-reset_jackBDF   <- object@region.stats@BDF
+reset_jackdf   <- object@region.stats@df
 reset_jackD     <- object@region.stats@D
 
 
-jackBDF   <- object@region.stats@BDF
+jackdf   <- object@region.stats@df
 jackD     <- object@region.stats@D
 
 Di      <- rep(NaN,n.region.names)
-BDFi    <- rep(NaN,n.region.names)
+dfi    <- rep(NaN,n.region.names)
 
 ## PROGRESS #########################
  progr <- progressBar()
@@ -104,25 +104,25 @@ BDFi    <- rep(NaN,n.region.names)
  for (xx in 1:n.region.names){
 	
         # jack one region 
-	jackBDF[[xx]] <- NULL
+	jackdf[[xx]] <- NULL
         jackD[[xx]]   <- NULL
 
-	#recalculate BDF and D 
+	#recalculate df and D 
 	D_ABBA <- sum( sapply(jackD, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[2,], na.rm=TRUE))}}), na.rm=TRUE)
 	D_BABA <- sum( sapply(jackD, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[3,], na.rm=TRUE))}}), na.rm=TRUE)
 
-	BDF_ABBA <- sum( sapply(jackBDF, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[2,], na.rm=TRUE))}}), na.rm=TRUE)
-	BDF_BABA <- sum( sapply(jackBDF, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[3,], na.rm=TRUE))}}), na.rm=TRUE)
+	df_ABBA <- sum( sapply(jackdf, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[2,], na.rm=TRUE))}}), na.rm=TRUE)
+	df_BABA <- sum( sapply(jackdf, function(x){if(length(x)==0){return(NaN)}else{return(sum(x[3,], na.rm=TRUE))}}), na.rm=TRUE)
 
 	Di[xx]   <- (D_ABBA-D_BABA)/(D_ABBA+D_BABA)
-	BDFi[xx] <- (BDF_ABBA-BDF_BABA)/(BDF_ABBA+BDF_BABA)
+	dfi[xx] <- (df_ABBA-df_BABA)/(df_ABBA+df_BABA)
 
 	#print(Di[xx])
-	#print(BDFi[xx])
+	#print(dfi[xx])
 
 
 	#reset
-	jackBDF[[xx]] <- reset_jackBDF[[xx]]
+	jackdf[[xx]] <- reset_jackdf[[xx]]
 	jackD[[xx]]   <- reset_jackD[[xx]]
 
 ## PROGRESS #######################################################
@@ -132,25 +132,25 @@ BDFi    <- rep(NaN,n.region.names)
  }
 
 Du   <- sum(Di, na.rm=TRUE)/n.region.names
-BDFu <- sum(BDFi, na.rm=TRUE)/n.region.names
+dfu <- sum(dfi, na.rm=TRUE)/n.region.names
 
 
 #print("------")
 
 #print(Du)
-#print(BDFu)
+#print(dfu)
 
 SE_D   <- sqrt( n.region.names*sum(D.valid*(Di-Du)^2, na.rm=TRUE) )
-SE_BDF <- sqrt( n.region.names*sum(BDF.valid*(BDFi-BDFu)^2, na.rm=TRUE) )
+SE_df <- sqrt( n.region.names*sum(df.valid*(dfi-dfu)^2, na.rm=TRUE) )
 
 #print(SE_D)
-#print(SE_BDF)
+#print(SE_df)
 
-object@BDF.z    <- as.matrix(BDF/SE_BDF)
-object@BDF.pval <- as.matrix(2*pnorm(-abs(object@BDF.z)))
+object@df.z    <- as.matrix(df/SE_df)
+object@df.pval <- as.matrix(2*pnorm(-abs(object@df.z)))
 object@D.z      <- as.matrix(D/SE_D)
 object@D.pval   <- as.matrix(2*pnorm(-abs(object@D.z)))
-object@BDF.SE   <- as.matrix(SE_BDF)
+object@df.SE   <- as.matrix(SE_df)
 object@D.SE     <- as.matrix(SE_D)
 
 return(object)

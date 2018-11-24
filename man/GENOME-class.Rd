@@ -163,8 +163,8 @@
     \item{\code{n.shared.sites}:}{...}
     \item{\code{n.monomorphic.sites}:}{...}
     \item{\code{BD}:}{...}
-    \item{\code{BDF}:}{...}
-    \item{\code{BDF_bayes}:}{...}
+    \item{\code{df}:}{...}
+    \item{\code{df_bayes}:}{...}
     \item{\code{alpha_ABBA}:}{...}
     \item{\code{alpha_BABA}:}{...}
     \item{\code{beta_BBAA}:}{...}
@@ -173,9 +173,9 @@
     \item{\code{D.pval}:}{...}
     \item{\code{D.z}:}{...}  
     \item{\code{D.SE}:}{...}
-    \item{\code{BDF.pval}:}{...}
-    \item{\code{BDF.z}:}{...}
-    \item{\code{BDF.SE}:}{...}
+    \item{\code{df.pval}:}{...}
+    \item{\code{df.z}:}{...}
+    \item{\code{df.SE}:}{...}
     \item{\code{P.Bd_clr}:}{...}    
     \item{\code{RNDmin}:}{...}
   }
