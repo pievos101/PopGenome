@@ -66,12 +66,12 @@ The following slots will be modified in the \code{"GENOME"}  object \cr
           1.\tab \code{D}	            \tab [1;eq. 2]   \tab Pattersons D statistic \cr
 	  2.\tab \code{f}	            \tab [2]   \tab f statistic \cr
 
- 3.\tab \code{df}	            \tab [x]   \tab Bd-fraction \cr
+ 3.\tab \code{df}	            \tab [3]   \tab Bd-fraction \cr
  4.\tab \code{RNDmin}	            \tab [x]   \tab RNDmin \cr
  5.\tab \code{D.z}	            \tab [x]   \tab z values (jackknife) \cr
  6.\tab \code{D.pval}	            \tab [x]   \tab P values (jackknife) \cr
- 7.\tab \code{df.z}	            \tab [x]   \tab z values (jackknife) \cr
- 8.\tab \code{df.pval}	            \tab [x]   \tab P values (jackknife) \cr
+ 7.\tab \code{df.z}	            \tab [3]   \tab z values (jackknife) \cr
+ 8.\tab \code{df.pval}	            \tab [3]   \tab P values (jackknife) \cr
  
           }
 
@@ -86,7 +86,9 @@ f is the fraction of the genome that is admixed [2].
 
 \references{
 [1] Durand, E. Y., Patterson, N. J., Reich, D., & Slatkin, M. (2011). \emph{Testing for ancient admixture between closely related populations.} \cr Molecular Biology and Evolution, 28(8), 2239--2252. doi:10.1093/molbev/msr048 \cr
-[2] Simon H Martin, Kanchon K Dasmahapatra, Nicola J Nadeau, et al. (2013). \emph{Genome-wide evidence for speciation with gene flow in Heliconius butterflies.} \cr Genome Res. doi:10.1101/gr.159426.113
+[2] Simon H Martin, Kanchon K Dasmahapatra, Nicola J Nadeau, et al. (2013). \emph{Genome-wide evidence for speciation with gene flow in Heliconius butterflies.} \cr Genome Res. doi:10.1101/gr.159426.113\cr
+[3] Bastian Pfeifer and Durrell D. Kapan (2019). \emph{Estimates of introgression as a function of pairwise distances.} \cr BMC Bioinformatics. https://doi.org/10.1186/s12859-019-2747-z
+
 }
 
 \examples{

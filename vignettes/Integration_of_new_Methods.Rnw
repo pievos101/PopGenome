@@ -210,4 +210,3 @@ Note, these chunks should be labeled with increasing ordered numeric values. (e.
 \texttt{concatenate.regions}. We recommend to produce GENOME classes for each chromosome seperately.
 
 \end{document}
-
