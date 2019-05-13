@@ -43,7 +43,7 @@ l.smooth=FALSE)
   } 
 
   \item{do.D}{Pattersons D and Martin's f statistic}
-  \item{do.df}{Bd-fraction}
+  \item{do.df}{d-fraction}
   \item{keep.site.info}{keep site specific values (\code{GENOME.class@region.stats})}
   \item{block.size}{the block size for jackknife}
   \item{do.RNDmin}{RNDmin (Rosenzweig, 2016)}

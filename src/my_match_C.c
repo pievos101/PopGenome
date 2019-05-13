@@ -9,6 +9,7 @@ SEXP my_match_C(SEXP pos, SEXP Rvector)
 PROTECT(pos);
 
   pos      = coerceVector(pos, INTSXP);
+  PROTECT(pos);
   Rvector  = coerceVector(Rvector, INTSXP);
 
 int size1;
@@ -43,7 +44,7 @@ for(int i=0; i < size1; i++) {
 
 }
 
-UNPROTECT(1);
+UNPROTECT(2);
 return pos;
 
 
@@ -57,6 +58,7 @@ SEXP whichbigger_C(SEXP pos, SEXP Rvector)
 PROTECT(pos);
 
   pos      = coerceVector(pos, INTSXP);
+  PROTECT(pos);
   Rvector  = coerceVector(Rvector, INTSXP);
 
 int size1;
@@ -83,7 +85,7 @@ if(treffer==0){
 }
 
 
-UNPROTECT(1);
+UNPROTECT(2);
 return pos;
 
 }

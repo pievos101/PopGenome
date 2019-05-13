@@ -26,6 +26,7 @@ Rvalue           = coerceVector(RinMatrix, REALSXP);
 double *Rval     = REAL(Rvalue);
 
 SEXP freq    = allocVector(REALSXP,3);
+PROTECT(freq);
 double *fr   = REAL(freq);
 SEXP sfreq   = allocMatrix(REALSXP,I,J);
 PROTECT(sfreq);
@@ -72,7 +73,7 @@ alle    = 0;
  
 }
 
-UNPROTECT(1);
+UNPROTECT(2);
 return sfreq;
 
 }

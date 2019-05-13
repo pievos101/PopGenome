@@ -169,8 +169,10 @@ double *einsen2   = REAL(RReinsen2);
 
 SEXP R2;
 R2 = allocVector(REALSXP,J1*J2);
+PROTECT(R2);
 SEXP M;
 M = allocMatrix(INTSXP,J1*J2,4); // for the fisher exact test
+PROTECT(M);
 
 // Init R2
 for(int i=0; i< J1*J2; i++){
@@ -292,7 +294,7 @@ SEXP list = R_NilValue;
      //setAttrib(list, R_NamesSymbol, list_names); 
    //SET_VECTOR_ELT(list, 2, SUBST);
  
-UNPROTECT(1);
+UNPROTECT(3);
    
 return list;
 
@@ -342,14 +344,19 @@ int m10=0;
 int m11=0;
 
 ret = allocVector(REALSXP,(J*(J-1))/2);
+PROTECT(ret);
 SEXP M;
 M = allocMatrix(INTSXP,(J*(J-1))/2,4); // for the fisher exact test
+PROTECT(M);
 SEXP Dist;
 Dist = allocVector(REALSXP,(J*(J-1))/2);
+PROTECT(Dist);
 SEXP SNP1;
 SNP1 = allocVector(REALSXP,(J*(J-1))/2);
+PROTECT(SNP1);
 SEXP SNP2;
 SNP2 = allocVector(REALSXP,(J*(J-1))/2);
+PROTECT(SNP2);
 
 // Init Dist
 for(int i=0; i < (J*(J-1))/2; i++){
@@ -484,7 +491,8 @@ SEXP list = R_NilValue;
      //setAttrib(list, R_NamesSymbol, list_names); 
    //SET_VECTOR_ELT(list, 2, SUBST);
  
-UNPROTECT(1);
+//UNPROTECT(1);
+UNPROTECT(6);
 
 return list;
 

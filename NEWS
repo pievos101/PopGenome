@@ -1,8 +1,9 @@
-Changes in PopGenome 2.7.1
+Changes in PopGenome 2.7.2
 ===========================
 
 NEW FEATURES:
 - include df introgression statistic 
+  from https://doi.org/10.1186/s12859-019-2747-z 
 
 Changes in PopGenome 2.6.0
 ===========================

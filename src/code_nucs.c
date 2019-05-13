@@ -18,6 +18,7 @@ J    = INTEGER(Rdim)[1]; // Spalten
 
 
 Rvalue                        = coerceVector(RinMatrix, STRSXP);
+PROTECT(Rvalue);
 
 //currentfilename = STRING_ELT(filenames,i);
 //filename = (char*)CHAR(currentfilename);
@@ -84,7 +85,7 @@ for (int i = 0; i < J; i++){
  }
 }
 
-UNPROTECT(1);
+UNPROTECT(2);
 
 return ret;
 

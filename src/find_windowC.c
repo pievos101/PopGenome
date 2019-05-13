@@ -12,9 +12,13 @@ INTEGER(val)[0] = 0;
 INTEGER(val)[1] = 0;
 
  Rstart       = coerceVector(Rstart, INTSXP);
+ PROTECT(Rstart);
  Rend         = coerceVector(Rend, INTSXP);
+ PROTECT(Rend);
  Rpositions   = coerceVector(Rpositions, INTSXP);
+ PROTECT(Rpositions);
  RMERKEN      = coerceVector(RMERKEN, INTSXP);
+ PROTECT(RMERKEN);
 
 int raus=0;
 int size;
@@ -28,11 +32,11 @@ size                = length(Rpositions);
 int begin = merken[0] - 1;
 
 if(start[0]>pos[size-1]){
-    UNPROTECT(1);
+    UNPROTECT(5);
  return R_NilValue;
 }
 if(end[0]<pos[0]){
-   UNPROTECT(1);
+   UNPROTECT(5);
  return R_NilValue;
 }
 
@@ -51,7 +55,7 @@ for(int i=begin; i < size; i++) {
    if(start[0]<=pos[i]){
 
        if(start[0]<pos[i] && end[0]<pos[i]){
-          UNPROTECT(1);
+          UNPROTECT(5);
           return R_NilValue;
        }
 
@@ -89,7 +93,7 @@ for(int i=begin; i < size; i++) {
 }
 
 mark:
-UNPROTECT(1);
+UNPROTECT(5);
 return val;
 
 

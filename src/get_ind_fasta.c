@@ -11,6 +11,7 @@ SEXP get_ind_fasta (SEXP RRfilename,SEXP RRind, SEXP RRn_nucs) {
   SEXP Rn_nucs;
 
   Rind        = coerceVector(RRind, INTSXP);
+  PROTECT(Rind);
   Rn_nucs     = coerceVector(RRn_nucs, INTSXP);
  
   int *n_nucs = INTEGER(Rn_nucs);
@@ -38,7 +39,7 @@ for(int x = 0; x < n_nucs[0]; x++){
 
   if(fp==NULL) {
     Rprintf("Cannot open file.\n");
-    UNPROTECT(1);
+    UNPROTECT(2);
     return R_NilValue;
   }
 
@@ -84,7 +85,7 @@ fclose(fp);
 
 // ##################################
 
-UNPROTECT(1);
+UNPROTECT(2);
 return ret;
 
 }

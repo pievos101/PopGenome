@@ -27,8 +27,10 @@ double *Rval     = REAL(Rvalue);
 
 PROTECT(ret  = allocMatrix(REALSXP, 8+I, J));
 SEXP freq    = allocVector(REALSXP,3);
+PROTECT(freq);
 double *fr   = REAL(freq);
 SEXP sfreq   = allocVector(REALSXP,I);
+PROTECT(sfreq);
 double *sfr  = REAL(sfreq);
 
 
@@ -186,7 +188,7 @@ for(int yy=0; yy<I; yy++){
    
 }
 
-UNPROTECT(1);
+UNPROTECT(3);
 
 return ret;
 

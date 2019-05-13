@@ -181,7 +181,7 @@ static char	nucleotide_mapping[] = {
   fp = fopen( file ,"rt");
   if(fp==NULL) {
     Rprintf("Cannot open file.\n");
-    UNPROTECT(1);
+    //UNPROTECT(1);
     return R_NilValue;
   }
 //  printf("0");
@@ -198,7 +198,10 @@ static char	nucleotide_mapping[] = {
 char *VCFbuffer;
 size_t result;
 VCFbuffer = calloc( 1, size+1 );
-if (VCFbuffer == NULL) {Rprintf("Memory error !!! ");Rprintf("\n");UNPROTECT(1); return R_NilValue;}
+if (VCFbuffer == NULL) {Rprintf("Memory error !!! ");Rprintf("\n");
+//UNPROTECT(1); 
+return R_NilValue;
+}
 
 //printf("3");
 

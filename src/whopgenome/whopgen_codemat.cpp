@@ -202,6 +202,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrix( SEXP vcfptr, SEXP mat )
 	
 	int			snppos=-1;//unused
 	SEXP			minus1_char = mkChar("-1");
+        PROTECT(minus1_char);
 	
 //	df1("ncol=%d, nrow=%d, wanted=%d\n",ncol,nrow,f->num_wanted_samples);
 
@@ -304,6 +305,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrix( SEXP vcfptr, SEXP mat )
 		if( fieldptr[i]==0 || fieldptr[i]=='\t' )
 		{
 			df0("VCF_readIntoCodeMatrix :: NO GT FIELD DEFINED!\n");
+			UNPROTECT(1);
 			return RBool::False();
 		}
 
@@ -341,6 +343,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrix( SEXP vcfptr, SEXP mat )
 				Rprintf("	debug info : per_row =%d\nwanted_sample[per_row]=%d\n",per_row, f->wanted_samples[per_row] );
 				Rprintf("	baseindex=%d, field = %d\n",samplefieldindex, (samplefieldindex + f->wanted_samples[per_row]) );
 				Rprintf("	numparsedfields=%d\n",f->numParsedFields());
+				UNPROTECT(1);
 				return RBool::False();
 			}
 
@@ -365,6 +368,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrix( SEXP vcfptr, SEXP mat )
 			if( (fieldptr[1] != '|' && fieldptr[1] != '/') || (fieldptr[3] != '\t' && fieldptr[3] != ':') )
 			{
 				df0("VCF_readIntoCodeMatrix :: Malformed GT field!\n");
+				UNPROTECT(1);
 				return RBool::False();
 			}
 
@@ -452,7 +456,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrix( SEXP vcfptr, SEXP mat )
 	df1("VCF_readIntoCodeMatrix ::\n\t%d nonbial columns\n",nonbialcols);
 	df1("\t%d bial columns\n",bialcols);
 	df1("\t%d total columns\n",bialcols+nonbialcols);
-	
+	UNPROTECT(1); //minus1_char
 	//
 	return RBool::True();
 }//...
@@ -469,6 +473,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 	if( 0 == f )
 	{
 		Rprintf("VCF_readIntoCodeMatrix :: Parameter 1 is not a VCFhandle EXTPTR!\n");
+		
 		return RBool::False();
 	}
 
@@ -478,6 +483,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 	if( samplefieldindex <= FORMAT )
 	{
 		Rprintf("VCF_readIntoCodeMatrix :: VCF does not appear to have a FORMAT field!\n");
+		
 		return RBool::False();
 	}
 	
@@ -487,6 +493,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 	if( false == m.isValid() )
 	{
 		Rprintf("VCF_readIntoCodeMatrix :: Parameter 2 not an integer matrix!\n");
+		
 		return RBool::False();
 	}
 	
@@ -496,6 +503,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 	if( m.getType() != INTSXP )
 	{
 		Rprintf("VCF_readIntoCodeMatrix :: Parameter 2 not an integer matrix!\n");
+		
 		return RBool::False();
 	}
 	
@@ -504,6 +512,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 	if( f->num_wanted_samples < 1 )
 	{
 		Rprintf("VCF_readIntoCodeMatrix :: No samples selected!\n");
+		
 		return RBool::False();
 	}
 
@@ -513,6 +522,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 	if( f->num_wanted_samples > (unsigned)nrow )
 	{
 		Rprintf("VCF_readIntoCodeMatrix :: %d samples selected but matrix offers only rows for %d samples!\n",f->num_wanted_samples,nrow);
+		
 		return RBool::False();
 	}
 
@@ -522,6 +532,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 	if( R_NilValue == colnamvec )
 	{
 		Rprintf("WhopGenome::VCF_readIntoCodeMatrix : WARNING : matrix has no column names vector! Cannot set SNP positions in matrix!\n");
+		
 		return RBool::False();
 	}
 
@@ -545,6 +556,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 	
 	int				snppos=-1;//unused
 	SEXP			minus1_char = mkChar("-1");
+        PROTECT(minus1_char);
 	
 //	df1("ncol=%d, nrow=%d, wanted=%d\n",ncol,nrow,f->num_wanted_samples);
 
@@ -649,6 +661,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 		if( fieldptr[i]==0 || fieldptr[i]=='\t' )
 		{
 			df0("VCF_readIntoCodeMatrix :: NO GT FIELD DEFINED!\n");
+			UNPROTECT(1);
 			return RBool::False();
 		}
 
@@ -686,6 +699,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 				Rprintf("	debug info : per_row =%d\nwanted_sample[per_row]=%d\n",per_row, f->wanted_samples[per_row] );
 				Rprintf("	baseindex=%d, field = %d\n",samplefieldindex, (samplefieldindex + f->wanted_samples[per_row]) );
 				Rprintf("	numparsedfields=%d\n",f->numParsedFields());
+				UNPROTECT(1);
 				return RBool::False();
 			}
 
@@ -713,6 +727,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 			if( (fieldptr[1] != '|' && fieldptr[1] != '/') || (fieldptr[3] != '\t' && fieldptr[3] != ':') )
 			{
 				df0("VCF_readIntoCodeMatrix :: Malformed GT field!\n");
+				UNPROTECT(1);
 				return RBool::False();
 			}
 
@@ -813,7 +828,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid( SEXP vcfptr, SEXP mat )
 	df1("VCF_readIntoCodeMatrix ::\n\t%d nonbial columns\n",nonbialcols);
 	df1("\t%d bial columns\n",bialcols);
 	df1("\t%d total columns\n",bialcols+nonbialcols);
-	
+	UNPROTECT(1);
 	//
 	return RBool::True();
 }//...
@@ -1155,7 +1170,9 @@ EXPORT	SEXP	VCF_readIntoNucleotideMatrix( SEXP vcfptr, SEXP mat )
 	//
 	//
 	SEXP m1 = mkChar("-1");
+        PROTECT(m1);
 	SEXP nix = mkChar("-");
+        PROTECT(nix);
 	for( unsigned int rcol = per_column; rcol < ncol; rcol ++ )
 	{
 		//
@@ -1178,7 +1195,7 @@ EXPORT	SEXP	VCF_readIntoNucleotideMatrix( SEXP vcfptr, SEXP mat )
 	df1("%d nonbial columns\n",nonbialcols);
 	df1("%d bial columns\n",bialcols);
 	df1("%d total columns\n",bialcols+nonbialcols);
-	
+	UNPROTECT(2);
 	//
 	return RBool::True();
 }
@@ -1250,6 +1267,7 @@ bool	read_bial( bool bFilterActivated, vcff * f, RMatrix &m )
 	unsigned int	column_stepsize = nrow;
 	int				snppos=-1;
 	SEXP			minus1_char = mkChar("-1");
+	PROTECT(minus1_char);
 	
 	SEXP colnamvec = m.getColNames();
 	if( R_NilValue == colnamvec )
@@ -1371,6 +1389,7 @@ bool	read_bial( bool bFilterActivated, vcff * f, RMatrix &m )
 		if( fieldptr[i]==0 || fieldptr[i]=='\t' )
 		{
 			df0("NO GT FIELD DEFINED!\n");
+			UNPROTECT(1);
 			return false;
 		}
 #endif
@@ -1413,6 +1432,7 @@ bool	read_bial( bool bFilterActivated, vcff * f, RMatrix &m )
 				Rprintf("	per_row =%d\nwanted_sample[per_row]=%d\n",per_row, f->wanted_samples[per_row] );
 				Rprintf("	baseindex=%d, field = %d\n",samplefieldindex, (samplefieldindex + f->wanted_samples[per_row]) );
 				Rprintf("	numparsedfields=%d\n",f->numParsedFields());
+				UNPROTECT(1);
 				return false;
 			}
 
@@ -1441,6 +1461,7 @@ bool	read_bial( bool bFilterActivated, vcff * f, RMatrix &m )
 			{
 				Rprintf("ERROR : unexpected character '%c' in Genotype field at position %d\n",fcopy[1],snppos);
 				df0("	=> Syntax error in GT field (%s)!\n",fieldptr);
+				UNPROTECT(1);
 				return false;
 			}
 			
@@ -1457,6 +1478,7 @@ bool	read_bial( bool bFilterActivated, vcff * f, RMatrix &m )
 			if( fcopy[3] != '\t' && fcopy[3] != 0 && fcopy[3] != ':' )
 			{
 				Rprintf("Syntax error in GT field (%s)!\n",fieldptr);
+				UNPROTECT(1);
 				return false;
 			}
 
@@ -1537,7 +1559,7 @@ bool	read_bial( bool bFilterActivated, vcff * f, RMatrix &m )
 	df1("getbial:\n	%d nonbial columns\n",nonbialcols);
 	df1("	%d bial columns\n",bialcols);
 	df1("	%d total columns\n",bialcols+nonbialcols);
-	
+	UNPROTECT(1);
 	//
 	return true;
 }
@@ -1717,6 +1739,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid2( SEXP vcfptr, SEXP mat )
 	
 	int			snppos      = -1;//unused
 	SEXP			minus1_char = mkChar("-1");
+        PROTECT(minus1_char);
 	
 //	df1("ncol=%d, nrow=%d, wanted=%d\n",ncol,nrow,f->num_wanted_samples);
 
@@ -1857,6 +1880,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid2( SEXP vcfptr, SEXP mat )
 		if( fieldptr[i]==0 || fieldptr[i]=='\t' )
 		{
 			df0("VCF_readIntoCodeMatrix :: NO GT FIELD DEFINED!\n");
+			UNPROTECT(1);
 			return RBool::False();
 		}
 
@@ -1894,6 +1918,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid2( SEXP vcfptr, SEXP mat )
 				Rprintf("	debug info : per_row =%d\nwanted_sample[per_row]=%d\n",per_row, f->wanted_samples[per_row] );
 				Rprintf("	baseindex=%d, field = %d\n",samplefieldindex, (samplefieldindex + f->wanted_samples[per_row]) );
 				Rprintf("	numparsedfields=%d\n",f->numParsedFields());
+				UNPROTECT(1);
 				return RBool::False();
 			}
 
@@ -1937,6 +1962,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid2( SEXP vcfptr, SEXP mat )
 			if( (fieldptr[1] != '|' && fieldptr[1] != '/')) //|| (fieldptr[3] != '\t' && fieldptr[3] != ':') )
 			{
 				df0("VCF_readIntoCodeMatrix :: Malformed GT field!\n");
+				UNPROTECT(1);
 				return RBool::False();
 			}
 
@@ -2067,7 +2093,7 @@ EXPORT	SEXP	VCF_readIntoCodeMatrixdiploid2( SEXP vcfptr, SEXP mat )
 	df1("VCF_readIntoCodeMatrix ::\n\t%d nonbial columns\n",nonbialcols);
 	df1("\t%d bial columns\n",bialcols);
 	df1("\t%d total columns\n",bialcols+nonbialcols);
-	
+	UNPROTECT(1);
 	//
 	return RBool::True();
 }//...

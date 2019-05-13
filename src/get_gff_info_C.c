@@ -10,11 +10,13 @@ SEXP get_gff_info_C (SEXP RRstart, SEXP RRend, SEXP RRfilename, SEXP RRposition)
   
   SEXP Rposition;
   Rposition   = coerceVector(RRposition, INTSXP);
+  PROTECT(Rposition);
   SEXP Rstart;
   Rstart      = coerceVector(RRstart, INTSXP);
+  PROTECT(Rstart);
   SEXP Rend;
   Rend        = coerceVector(RRend, INTSXP);  
-
+  PROTECT(Rend);
   
   int  *cstart = INTEGER(Rstart);
   int  *cend   = INTEGER(Rend);
@@ -32,9 +34,11 @@ SEXP get_gff_info_C (SEXP RRstart, SEXP RRend, SEXP RRfilename, SEXP RRposition)
   FILE *fp;
   fp = fopen( file ,"r");
 
+PROTECT(info = allocVector(STRSXP,1));
+
   if(fp==NULL) {
     Rprintf("Cannot open file.\n");
-    UNPROTECT(1);
+    UNPROTECT(4);
     return R_NilValue;
   }
 
@@ -44,7 +48,6 @@ SEXP get_gff_info_C (SEXP RRstart, SEXP RRend, SEXP RRfilename, SEXP RRposition)
 //   INTEGER(info)[0] = -1;
 //   INTEGER(info)[1] = -1;
 
-PROTECT(info = allocVector(STRSXP,1));
   
   int  count    = 0;
   int  count2   = 0;
@@ -169,7 +172,7 @@ int line_count = 0;
 SCHLUSS:
 
 fclose(fp);
-UNPROTECT(1);
+UNPROTECT(4);
 return(info);
 
 }//END OF FUNCTION
