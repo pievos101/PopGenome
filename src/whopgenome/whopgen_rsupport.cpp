@@ -181,7 +181,7 @@ const char* R_GetExtPtrTag( SEXP var )
 	{
 		df1("Generic exception trying to get extptr tag\n");
 	}
-	
+	UNPROTECT( 1 );
 	return 0;
 }
 
@@ -1003,6 +1003,7 @@ SEXP	createList( SEXP r )
 {
 	SEXP res;
 	PROTECT( res = allocList( 5 ) );
+        UNPROTECT(1);
 	return res;
 }
 

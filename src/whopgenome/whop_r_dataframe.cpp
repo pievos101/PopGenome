@@ -142,7 +142,7 @@ SEXP	createDataFrame( unsigned int numrows, unsigned int numcolumns, const char*
     
     //
     UNPROTECT(unprotcount);
-
+    //UNPROTECT(3);
     //
     return newlist;
 }
