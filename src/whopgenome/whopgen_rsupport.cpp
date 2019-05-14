@@ -181,7 +181,7 @@ const char* R_GetExtPtrTag( SEXP var )
 	{
 		df1("Generic exception trying to get extptr tag\n");
 	}
-	UNPROTECT( 1 );
+	//UNPROTECT( 1 );
 	return 0;
 }
 
@@ -496,6 +496,7 @@ void	RBool::set( bool v ){
 		PROTECT( _value = allocVector(LGLSXP,1 ) );
 	}
 	INTEGER(_value)[0] = v?1:0;
+        //UNPROTECT(1);
 }
 
 
@@ -557,6 +558,7 @@ void	RInteger::set( int v ){
 		PROTECT( _value = allocVector(INTSXP,1 ) );
 	}
 	INTEGER(_value)[0] = v;
+        //UNPROTECT(1);
 }
 
 
