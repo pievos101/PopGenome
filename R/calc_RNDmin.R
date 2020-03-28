@@ -83,7 +83,11 @@ for(xx in 1:n1){
 }
 
 RNDmin  <- min(diff, na.rm=TRUE)/((d1O+d2O)/2) 
+Gmin    <- min(diff, na.rm=TRUE)/mean(diff, na.rm=TRUE)
 
+return(list(RNDmin=RNDmin,Gmin=Gmin))
+
+}
 ############################# new #############################################
 #id       <- which(diff==min(diff,na.rm=TRUE))[1]
 #seqmin1  <- bial[populations[[1]][ppp1[id]],] 
@@ -110,6 +114,4 @@ RNDmin  <- min(diff, na.rm=TRUE)/((d1O+d2O)/2)
 #RNDmin <- (ONEX*RNDmin - TWOX*RNDmin)
 ############################# end new #########################################
 
-return(RNDmin)
 
-}

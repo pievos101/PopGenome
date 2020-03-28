@@ -1,7 +1,7 @@
 #Removed according to recommendations
 #PKG_LIBS = -lstdc++
 
-PKG_LIBS = -lz
+PKG_LIBS = -lz 
 
 PKG_CFLAGS = #$(C_VISIBILITY)
 

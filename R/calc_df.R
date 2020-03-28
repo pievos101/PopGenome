@@ -222,6 +222,9 @@ sum_maxBABA <- sum(maxBABA, na.rm=TRUE)
 
 f <- (sum_ABBA - sum_BABA)/(sum_maxABBA - sum_maxBABA)
 
-return(list(Bd_dir=Bd_dir, D=D, D_bayes=D_bayes, f=f, D_site=D_site, ABBA=ABBA_site, BABA=BABA_site, alpha_ABBA=alpha_ABBA, alpha_BABA=alpha_BABA, beta_BBAA=beta_BBAA))
+#D3
+D3 <- (d23-d13)/(d23+d13)
+
+return(list(Bd_dir=Bd_dir, D=D, D_bayes=D_bayes, f=f, D_site=D_site, ABBA=ABBA_site, BABA=BABA_site, alpha_ABBA=alpha_ABBA, alpha_BABA=alpha_BABA, beta_BBAA=beta_BBAA,D3=D3))
 
 }

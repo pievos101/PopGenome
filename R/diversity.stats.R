@@ -47,6 +47,9 @@ else{poppairs <- 1;nn <- "pop1"}
   
 
   nam    <- paste("pop",1:npops)
+  
+  #cat("X:",nam,"\n")
+
   init1  <- matrix(0,n.region.names,npops)
   
   Pi     <- init1
@@ -217,8 +220,11 @@ if(subsites=="intergenic"){
 
     if(keep.site.info){
     nucws[[xx]]                 <- res$nucwsite
-    rownames(nucws[[xx]])	<- nam
-     		   
+#print(respop)
+#print(nucws)	
+    rownames(nucws[[xx]])	<- nam[respop]
+#print(nucws)     	
+	   
     }
 
   # PROGRESS #######################################################

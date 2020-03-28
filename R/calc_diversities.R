@@ -1,5 +1,7 @@
 calc_diversities <- function(matrix_pol,populations,pi=FALSE,keep.site.info=FALSE){
 
+#print(populations)
+
 # Only one polymorphic site
 if(is.vector(matrix_pol)){
    matrix_pol <- as.matrix(matrix_pol)
@@ -58,11 +60,17 @@ uniquematrix        <- matrix_hap_sub[!duplids,,drop=FALSE]
 nhgesamt             <- dim(uniquematrix)[1]
 sfreqh               <- matrix(0,npops,nhgesamt)
  
+#print(sfreqh)
+#print(nam)
+
+#print(rownames(uniquematrix))
+
 rownames(sfreqh)     <- nam
 colnames(sfreqh)     <- rownames(uniquematrix)
 rownames(matrix_hap) <- NULL
 
 
+#print(sfreqh)
 
  for(xx in 1:npops){
 
@@ -105,6 +113,11 @@ for(xx in 1:npops){
 # calculate nucleotide diversity
 
 nucwsite           <- matrix(NaN,npops,dim(matrix_pol)[2])
+#print(nucwsite)
+#print(nam)
+
+#print(colnames(matrix_pol))
+
 rownames(nucwsite) <- nam
 colnames(nucwsite) <- colnames(matrix_pol) 
 

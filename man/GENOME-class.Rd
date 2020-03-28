@@ -164,6 +164,8 @@
     \item{\code{n.monomorphic.sites}:}{...}
     \item{\code{BD}:}{...}
     \item{\code{df}:}{...}
+    \item{\code{D3}:}{...}
+    \item{\code{Gmin}:}{...}
     \item{\code{df_bayes}:}{...}
     \item{\code{alpha_ABBA}:}{...}
     \item{\code{alpha_BABA}:}{...}

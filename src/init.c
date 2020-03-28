@@ -19,7 +19,7 @@ extern SEXP compute_FREQ_C(SEXP);
 extern SEXP compute_FREQOUT_C(SEXP);
 extern SEXP count_congruent(SEXP);
 extern SEXP FASTA_getNextIndividual(SEXP, SEXP);
-extern SEXP FASTA_open(SEXP, SEXP);
+extern SEXP FASTA_open(SEXP, SEXP, SEXP);
 extern SEXP find_lines_GFF(SEXP, SEXP);
 extern SEXP find_lines_GFF_Human2(SEXP, SEXP);
 extern SEXP find_lines_SNP(SEXP, SEXP);

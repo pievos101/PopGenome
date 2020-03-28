@@ -53,6 +53,7 @@ keep.site.info=TRUE
   D      <- matrix(NaN,n.region.names,1)
   BD     <- matrix(NaN,n.region.names,1)
   df    <- matrix(NaN,n.region.names,1)
+  D3    <- matrix(NaN,n.region.names,1)
   df_bayes  <- matrix(NaN,n.region.names,1)
   alpha_ABBA  <- matrix(NaN,n.region.names,1)
   alpha_BABA  <- matrix(NaN,n.region.names,1)
@@ -64,6 +65,7 @@ keep.site.info=TRUE
 P.Bd_clr <- matrix(NaN,n.region.names,1)
   f      <- matrix(NaN,n.region.names,1)
   RNDmin <- matrix(NaN,n.region.names,1)
+  Gmin   <- matrix(NaN,n.region.names,1)
   D.z    <- matrix(NaN,n.region.names,1) # jacknife
   D.pval <- matrix(NaN,n.region.names,1) # jacknife
   df.z    <- matrix(NaN,n.region.names,1) # jacknife
@@ -77,6 +79,8 @@ P.Bd_clr <- matrix(NaN,n.region.names,1)
   colnames(BD)      <- "BD statistic"
   rownames(df)     <- region.names
   colnames(df)     <- "df statistic"
+  rownames(D3)     <- region.names
+  colnames(D3)     <- "D3 statistic"
   rownames(df_bayes)     <- region.names
   colnames(df_bayes)     <- "df bayes factor"
   rownames(Bd_dir)  <- region.names
@@ -89,6 +93,8 @@ P.Bd_clr <- matrix(NaN,n.region.names,1)
   colnames(f)       <- "f statistic"
   rownames(RNDmin)  <- region.names
   colnames(RNDmin)  <- "RNDmin"
+  rownames(Gmin)  <- region.names
+  colnames(Gmin)  <- "RNDmin"
   # ----------------------------------------------
 
   site.D         <- vector("list",n.region.names) # region stats
@@ -236,6 +242,7 @@ if(subsites=="included" & length(bial!=0)){
     if(do.df){
 	    res            <- calc_df(bial, populations, outgroup, keep.site.info, dxy.table, l.smooth) 
     	    df[xx]        <- res$D
+            D3[xx]        <- res$D3
             df_bayes[xx]  <- res$D_bayes
             alpha_ABBA[xx] <- res$alpha_ABBA
 	    alpha_BABA[xx] <- res$alpha_BABA
@@ -254,7 +261,9 @@ if(subsites=="included" & length(bial!=0)){
 
 
    if(do.RNDmin){
-  	RNDmin[xx] <- calc_RNDmin(bial, populations, outgroup)
+        res        <- calc_RNDmin(bial, populations, outgroup)
+  	RNDmin[xx] <- res[[1]]
+	Gmin[xx]   <- res[[2]]	
    }		
 
 
@@ -299,6 +308,7 @@ if(subsites=="included" & length(bial!=0)){
  object@D        <- D
  object@BD       <- BD
  object@df       <- df
+ object@D3       <- D3
  object@df_bayes      <- df_bayes
  object@alpha_ABBA     <- alpha_ABBA
  object@alpha_BABA     <- alpha_BABA
@@ -314,7 +324,8 @@ if(subsites=="included" & length(bial!=0)){
  object@df.pval   <- df.pval
 
  object@RNDmin   <- RNDmin
- 
+ object@Gmin     <- Gmin
+
  return(object)
  })
 

@@ -1,4 +1,4 @@
-PKG_LIBS = -lws2_32 -lz
+PKG_LIBS = -lws2_32 -lz 
 
 PKG_CFLAGS = -Wno-format #$(C_VISIBILITY)
 PKG_CPPFLAGS = -Wno-format
