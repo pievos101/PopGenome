@@ -110,8 +110,9 @@ bool	determineAlignmentDimensionsFasta( unsigned int &numnucleotides, unsigned i
 			{
 				if( c != '\n' && c != '\t' && c != ' ' && c != '\r' )
 				{
-					Rprintf("FASTA: NOT COUNTING '%c'(%d) as NUCLEOTIDE!\n",c,c);
-					return false;
+					Rprintf("FASTA: NOT COUNTING '%c'(%d) as NUCLEOTIDE! REPLACED BY 'n'! \n",c,c);
+					//return false;
+					thissample_numnucleotides++;
 				}
 			}
 			bytespersequence++;
