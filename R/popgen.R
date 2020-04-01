@@ -31,7 +31,7 @@ for(xx in 1:npops){
         if(length(attr(Code_matrix,"path"))!=0){
            warning("GEN",attr(Code_matrix,"path"))
         }
-      warning("The allele ----->: ",namesX[isit], " <---- doesnt exist")
+      warning("The individual ----->: ",paste(namesX[isit],collapse=","), " <---- does not exist")
       namesX <- namesX[-isit]
      }
    
