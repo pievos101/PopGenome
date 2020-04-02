@@ -24,7 +24,7 @@ for(xx in 1:npops){
    if(is.character(Populations[[xx]])){
   
      namesX  <- Populations[[xx]]
-     isit    <- which(is.na(match(namesX,rownames(Code_matrix))))
+     isit    <- which(is.na(match(tolower(namesX),tolower(rownames(Code_matrix)))))
    
      if(length(isit)>=1){
    # Sequence doesnt exist
@@ -36,7 +36,7 @@ for(xx in 1:npops){
      }
    
    # unbekannte geloescht ! 
-    Populations[[xx]]   <- match(namesX,rownames(Code_matrix))
+    Populations[[xx]]   <- match(tolower(namesX),tolower(rownames(Code_matrix)))
     Populations2[[xx]]  <- namesX
   } # End Population is character
  
@@ -73,7 +73,7 @@ outgroup2 <- vector()        # outgroup Namen
 if(is.character(outgroup)){
 
  namesX  <- outgroup
- isit    <- which(is.na(match(namesX,rownames(Code_matrix))))
+ isit    <- which(is.na(match(tolower(namesX),tolower(rownames(Code_matrix)))))
  
  if(length(isit)>=1){
 
@@ -84,7 +84,7 @@ if(is.character(outgroup)){
   namesX   <- namesX[-isit] # unbekannte geloescht !
  
  } 
-  outgroup  <- match(namesX,rownames(Code_matrix))
+  outgroup  <- match(tolower(namesX),tolower(rownames(Code_matrix)))
   outgroup2 <- rownames(Code_matrix)[outgroup]
   
 } # end of outgroup character
@@ -123,11 +123,11 @@ if(outgroup[1]){
   
    if(!ALLROWS){          # Wenn nicht alle Sequencen (beziehungweise keine Population definiert wurde)
      for(xx in 1:npops){
-        Populations[[xx]] <- match(Populations2[[xx]],rownames(Code_matrix))
+        Populations[[xx]] <- match(tolower(Populations2[[xx]]),tolower(rownames(Code_matrix)))
      } 
    }
 
-   if(outgroup[1]!=FALSE){outgroup <- match(outgroup2,rownames(Code_matrix))}
+   if(outgroup[1]!=FALSE){outgroup <- match(tolower(outgroup2),tolower(rownames(Code_matrix)))}
    if(length(outgroup)==0){outgroup <- FALSE} # Outgroup existiert garnicht !
    ###### GET DATA #############################
 
