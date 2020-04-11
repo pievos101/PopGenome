@@ -186,7 +186,7 @@ L_baba      <- lbeta(alpha_BABA,beta_BBAA) #(lgamma(alpha_BABA)*lgamma(beta_BBAA
 D_bayes             <- D
 D_bayes[D==0]       <- 1
 D_bayes[D >0]       <- 1 + exp((L_abba/L_baba)) - exp(1)
-D_bayes[D <0]       <- 1 + exp((L_baba/L_abba)) - exp(1)
+D_bayes[D <0]       <- -(1 + exp((L_baba/L_abba)) - exp(1))
 
 #D_bayes            <- sum_ABBA/sum_BABA
 

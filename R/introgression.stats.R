@@ -1,4 +1,4 @@
-setGeneric("introgression.stats", function(object, subsites=FALSE, do.D=TRUE, do.df=TRUE, keep.site.info=TRUE, block.size=FALSE, do.RNDmin=FALSE, l.smooth=FALSE) standardGeneric("introgression.stats"))
+setGeneric("introgression.stats", function(object, subsites=FALSE, do.D=TRUE, do.df=TRUE, keep.site.info=TRUE, block.size=FALSE, do.RNDmin=FALSE, l.smooth=TRUE) standardGeneric("introgression.stats"))
 
 setMethod("introgression.stats","GENOME",function(object, subsites, do.D, do.df, keep.site.info, block.size, do.RNDmin, l.smooth){
 
