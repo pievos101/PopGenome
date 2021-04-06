@@ -9,7 +9,7 @@ if((missing.freqs==TRUE) & (minor.freqs==FALSE)){
 	object   <- count.unknowns(object)
 	change   <- object@region.data
 
-	MAF      <- object@region.stats@missing.freqs
+	MISS      <- object@region.stats@missing.freqs
 
 	included <- vector("list",length(object@region.names))
 
@@ -22,7 +22,7 @@ if((missing.freqs==TRUE) & (minor.freqs==FALSE)){
 		
 		if(length(object@region.data@biallelic.sites[[xx]])==0){next}
 
-		truefalse <- apply(MAF[[xx]],2,function(y){
+		truefalse <- apply(MISS[[xx]],2,function(y){
 			  check <- (y >= miss.lower.bound) & (y <= miss.upper.bound)
 			  if(all(check)){return(TRUE)}else{return(FALSE)}	
 		})
@@ -83,9 +83,12 @@ if((minor.freqs==TRUE) & (missing.freqs==TRUE) ){
 
 	print("Using minor & missing allele frequencies")
 	object   <- detail.stats(object)
+	object   <- count.unknowns(object)
+
 	change   <- object@region.data
 
 	MAF      <- object@region.stats@minor.allele.freqs
+	MISS     <- object@region.stats@missing.freqs
 
 	included <- vector("list",length(object@region.names))
 
@@ -98,12 +101,17 @@ if((minor.freqs==TRUE) & (missing.freqs==TRUE) ){
 		
 		if(length(object@region.data@biallelic.sites[[xx]])==0){next}
 
-		truefalse <- apply(MAF[[xx]],2,function(y){
-			  check <- (y >= maf.lower.bound) & (y <= maf.upper.bound) & (y >= miss.lower.bound) & (y <= miss.upper.bound)
+		truefalse1 <- apply(MAF[[xx]],2,function(y){
+			  check <- (y >= maf.lower.bound) & (y <= maf.upper.bound) 
 			  if(all(check)){return(TRUE)}else{return(FALSE)}	
 		})
 
-	included[[xx]] <- truefalse
+		truefalse2 <- apply(MISS[[xx]],2,function(y){
+			  check <- (y >= miss.lower.bound) & (y <= miss.upper.bound)
+			  if(all(check)){return(TRUE)}else{return(FALSE)}	
+		})
+
+	included[[xx]] <- truefalse1 & truefalse2
 
 	# PROGRESS #######################################################
         progr <- progressBar(xx,length(object@region.names), progr)
