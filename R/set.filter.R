@@ -24,7 +24,7 @@ if((missing.freqs==TRUE) & (minor.freqs==FALSE)){
 
 		truefalse <- apply(MISS[[xx]],2,function(y){
 			  check <- (y >= miss.lower.bound) & (y <= miss.upper.bound)
-			  if(all(check)){return(TRUE)}else{return(FALSE)}	
+			  if(all(check, na.rm=TRUE)){return(TRUE)}else{return(FALSE)}	
 		})
 
 	included[[xx]] <- truefalse
@@ -62,7 +62,7 @@ if((minor.freqs==TRUE) & (missing.freqs==FALSE) ){
 
 		truefalse <- apply(MAF[[xx]],2,function(y){
 			  check <- (y >= maf.lower.bound) & (y <= maf.upper.bound)
-			  if(all(check)){return(TRUE)}else{return(FALSE)}	
+			  if(all(check, na.rm=TRUE)){return(TRUE)}else{return(FALSE)}	
 		})
 
 	included[[xx]] <- truefalse
@@ -103,12 +103,12 @@ if((minor.freqs==TRUE) & (missing.freqs==TRUE) ){
 
 		truefalse1 <- apply(MAF[[xx]],2,function(y){
 			  check <- (y >= maf.lower.bound) & (y <= maf.upper.bound) 
-			  if(all(check)){return(TRUE)}else{return(FALSE)}	
+			  if(all(check, na.rm=TRUE)){return(TRUE)}else{return(FALSE)}	
 		})
 
 		truefalse2 <- apply(MISS[[xx]],2,function(y){
 			  check <- (y >= miss.lower.bound) & (y <= miss.upper.bound)
-			  if(all(check)){return(TRUE)}else{return(FALSE)}	
+			  if(all(check, na.rm=TRUE)){return(TRUE)}else{return(FALSE)}	
 		})
 
 	included[[xx]] <- truefalse1 & truefalse2
