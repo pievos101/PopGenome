@@ -21,7 +21,8 @@ missing.freqs          = "list",
 nuc.diversity.between  = "list",
 nuc.diversity.within   = "list",
 D		       = "list", #Patterson's D
-df		       = "list" #df
+df		       = "list", #df
+TVmatrix       = "list"
 
 ))
 
