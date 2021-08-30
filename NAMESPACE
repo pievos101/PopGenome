@@ -55,6 +55,8 @@ exportMethods(get.individuals)
 exportMethods(PG_plot.biallelic.matrix)
 exportMethods(count.unknowns)
 exportMethods(set.filter)
+exportMethods(pairwise.Tv)
+
 
 export(create.PopGenome.method)
 export(concatenate.regions)
