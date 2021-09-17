@@ -1,6 +1,6 @@
-setGeneric("pairwise.Tv", function(object, subsites=FALSE, shared.only=TRUE) standardGeneric("pairwise.Tv"))
+setGeneric("pairwise.Tv", function(object, subsites=FALSE, shared.only=TRUE, by.genotype=TRUE) standardGeneric("pairwise.Tv"))
 
-setMethod("pairwise.Tv","GENOME",function(object, subsites, shared.only){
+setMethod("pairwise.Tv","GENOME",function(object, subsites, shared.only, by.genotype){
 
 
 region.names                 <- object@region.names
@@ -120,7 +120,8 @@ if(subsites=="included" & length(bial!=0)){
                                         populations, 
                                         outgroup, 
                                         transitions,
-                                        shared.only) 
+                                        shared.only,
+                                        by.genotype) 
     TVmatrix[[xx]]  <- res
  }   
 
