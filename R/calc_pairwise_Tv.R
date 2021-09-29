@@ -63,15 +63,13 @@ if(n.ind==0){
 n.bial.sites <- dim(bial)[2]
 
 TVmatrix <- matrix(0, n.ind/2, n.ind/2)
-iii      <- seq(1,dim(bial)[1],2)
+iii      <- seq(1,dim(bial)[1],2) # Maybe this needs to be fixed @FIXME
 rownames(TVmatrix) <- rownames(bial)[iii]
 colnames(TVmatrix) <- rownames(bial)[iii]
-
 
 idx  <- sort(rep(1:(dim(bial)[1]/2),2))
 
 geno <- split(rownames(bial), idx)
-
 
 PAIRS <- combn(length(geno),2)
 
@@ -89,17 +87,19 @@ for(xx in 1:dim(PAIRS)[2]){
 	check1 <- geno1bial[1,]+geno1bial[2,]
 	check2 <- geno2bial[1,]+geno2bial[2,]
 
-	SCA  <- rep(0.5, dim(bial)[2])
-	ONE  <- which((check1==0 & check2==2) || (check1==2 & check2==0))
-	ZERO <- which((check1==0 & check2==0) || (check1==2 & check2==2))
-	SCA[ONE]  <- 1
-	SCA[ZERO] <- 0
+	# first logic
+	#SCA  <- rep(0.5, dim(bial)[2])
+	#ONE  <- which((check1==0 & check2==2) || (check1==2 & check2==0))
+	#ZERO <- which((check1==0 & check2==0) || (check1==2 & check2==2))
+	#SCA[ONE]  <- 1
+	#SCA[ZERO] <- 0
+
+	# second logic
+	SCA = abs(check1-check2)
 
 	transv <- as.numeric(!transitions)
 	n.tv   <- sum(SCA*transv)
-	n.tv   <- sum(SCA)
-
-
+	
 	TVmatrix[ind1_id, ind2_id] <- n.tv/dim(bial)[2]
 	TVmatrix[ind2_id, ind1_id] <- n.tv/dim(bial)[2]
 
