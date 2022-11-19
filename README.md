@@ -1,7 +1,7 @@
 # PopGenome
 
 <p align="center">
-<img src="https://github.com/pievos101/PopGenome/blob/main/logo.png" width="400">
+<img src="https://github.com/pievos101/PopGenome/blob/master/logo.png" width="400">
 </p>
 
 
