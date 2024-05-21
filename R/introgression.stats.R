@@ -1,13 +1,13 @@
-setGeneric("introgression.stats", function(object, subsites=FALSE, do.D=TRUE, do.df=TRUE, keep.site.info=TRUE, block.size=FALSE, do.RNDmin=FALSE, l.smooth=TRUE) standardGeneric("introgression.stats"))
+setGeneric("introgression.stats", function(object, subsites=FALSE, do.D=TRUE, do.df=TRUE, keep.site.info=TRUE, block.size=FALSE, do.RNDmin=FALSE, l.smooth=TRUE, lambda=NaN) standardGeneric("introgression.stats"))
 
-setMethod("introgression.stats","GENOME",function(object, subsites, do.D, do.df, keep.site.info, block.size, do.RNDmin, l.smooth){
+setMethod("introgression.stats","GENOME",function(object, subsites, do.D, do.df, keep.site.info, block.size, do.RNDmin, l.smooth, lambda){
 
 do.BD=FALSE
 dxy.table=FALSE
 D.global=FALSE
 do.CLR=FALSE
 dgt=FALSE
-lambda=FALSE
+#lambda=FALSE
 
   
 if(do.CLR){
@@ -51,9 +51,11 @@ keep.site.info=TRUE
    
 # init
   D      <- matrix(NaN,n.region.names,1)
+  Dp     <- matrix(NaN,n.region.names,1)
   BD     <- matrix(NaN,n.region.names,1)
   df    <- matrix(NaN,n.region.names,1)
-  D3    <- matrix(NaN,n.region.names,1)
+  df_theta   <- matrix(NaN,n.region.names,1)
+  D3       <- matrix(NaN,n.region.names,1)
   df_bayes  <- matrix(NaN,n.region.names,1)
   alpha_ABBA  <- matrix(NaN,n.region.names,1)
   alpha_BABA  <- matrix(NaN,n.region.names,1)
@@ -75,6 +77,8 @@ P.Bd_clr <- matrix(NaN,n.region.names,1)
   # Names ----------------------------------------
   rownames(D)       <- region.names
   colnames(D)       <- "D statistic"
+  rownames(Dp)       <- region.names
+  colnames(Dp)       <- "Dp statistic"
   rownames(BD)      <- region.names
   colnames(BD)      <- "BD statistic"
   rownames(df)     <- region.names
@@ -83,6 +87,8 @@ P.Bd_clr <- matrix(NaN,n.region.names,1)
   colnames(D3)     <- "D3 statistic"
   rownames(df_bayes)     <- region.names
   colnames(df_bayes)     <- "df bayes factor"
+  rownames(df_theta)     <- region.names
+  colnames(df_theta)     <- "df theta"
   rownames(Bd_dir)  <- region.names
   colnames(Bd_dir)  <- "Direction"
   rownames(Bd_clr)  <- region.names
@@ -215,7 +221,8 @@ if(subsites=="included" & length(bial!=0)){
 	
 	    res       <- calc_D(bial, populations, outgroup, keep.site.info) 
     	    D[xx]     <- res$D
-    	    f[xx]     <- res$f	 
+    	    f[xx]     <- res$f	
+          Dp[xx]    <- res$Dp 
 		
    # fill detailed Slots --------------------------------# 
      if(keep.site.info){	 	
@@ -240,13 +247,14 @@ if(subsites=="included" & length(bial!=0)){
     }
 
     if(do.df){
-	    res            <- calc_df(bial, populations, outgroup, keep.site.info, dxy.table, l.smooth) 
+	    res            <- calc_df(bial, populations, outgroup, keep.site.info, dxy.table, l.smooth, lambda) 
     	    df[xx]        <- res$D
             D3[xx]        <- res$D3
             df_bayes[xx]  <- res$D_bayes
             alpha_ABBA[xx] <- res$alpha_ABBA
 	    alpha_BABA[xx] <- res$alpha_BABA
 	    beta_BBAA[xx]  <- res$beta_BBAA
+      df_theta[xx]   <- res$df_theta
 		
     	    #f[xx]      <- res$f
             Bd_dir[xx] <- res$Bd_dir
@@ -306,10 +314,12 @@ if(subsites=="included" & length(bial!=0)){
  rm(change)
  gc()
  object@D        <- D
+ object@Dp        <- Dp
  object@BD       <- BD
  object@df       <- df
  object@D3       <- D3
  object@df_bayes      <- df_bayes
+ object@df_theta      <- df_theta
  object@alpha_ABBA     <- alpha_ABBA
  object@alpha_BABA     <- alpha_BABA
  object@beta_BBAA      <- beta_BBAA

@@ -34,6 +34,7 @@ ABBA   <- (1-freqs[1,])*freqs[2,]*freqs[3,]
 #print(ABBA)
 BABA   <- freqs[1,]*(1-freqs[2,])*freqs[3,]
 #print(BABA)
+BBAA   <- freqs[1,]*freqs[2,]*(1-freqs[3,])
 }else{
 # calc D
 ABBA   <- (1-freqs[1,])*freqs[2,]
@@ -45,8 +46,12 @@ BABA   <- freqs[1,]*(1-freqs[2,])
 
 sum_ABBA <- sum(ABBA,na.rm=TRUE)
 sum_BABA <- sum(BABA,na.rm=TRUE) 
+sum_BBAA <- sum(BBAA,na.rm=TRUE) 
+
 
 D <- (sum_ABBA - sum_BABA)/(sum_ABBA + sum_BABA)
+
+Dp <- abs((sum_ABBA - sum_BABA)/(sum_BBAA + sum_ABBA + sum_BABA))
 
 if(keep.site.info){
  D_site <- (ABBA - BABA)/(ABBA + BABA)
@@ -79,6 +84,9 @@ f <- (sum_ABBA - sum_BABA)/(sum_maxABBA - sum_maxBABA)
 f <- NaN
 }
 
-return(list(D=D, f=f, D_site=D_site, ABBA=ABBA_site, BABA=BABA_site))
+
+ 
+
+return(list(D=D, Dp=Dp, f=f, D_site=D_site, ABBA=ABBA_site, BABA=BABA_site))
 
 }

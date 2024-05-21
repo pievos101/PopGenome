@@ -1,4 +1,4 @@
-calc_df <- function(bial, populations, outgroup, keep.site.info=FALSE, dxy.table=FALSE, l.smooth){
+calc_df <- function(bial, populations, outgroup, keep.site.info=FALSE, dxy.table=FALSE, l.smooth, lambda){
 
 
 if(l.smooth){
@@ -139,7 +139,7 @@ root[root!=0] <- 1
 #ABBA    <- ( ((1-p) + alpha )     * (q     + beta) ) * freqs[3,] 
 
 
-#Bd-fraction
+#d-fraction
 
 BABA  <-  p*d23
 ABBA  <-  q*d13  
@@ -168,9 +168,13 @@ B_BBAA <- p*q*(1-freqs[3,])
 
 scale      <- (n1+n2+n3)/3
 
-alpha_ABBA <- scale   + sum( q*d13  * scale, na.rm=TRUE) 
-alpha_BABA <- scale   + sum( p*d23  * scale, na.rm=TRUE)
-beta_BBAA  <- scale   + sum( B_BBAA * scale, na.rm=TRUE)
+if(is.na(lambda)){
+	lambda     <- scale
+}
+
+alpha_ABBA <- lambda   + sum( q*d13  * scale, na.rm=TRUE) 
+alpha_BABA <- lambda   + sum( p*d23  * scale, na.rm=TRUE)
+beta_BBAA  <- lambda   + sum( B_BBAA * scale, na.rm=TRUE)
 
 #test
 #beta_ABBA  <- scale   + sum( B_ABBA * scale, na.rm=TRUE)
@@ -186,9 +190,12 @@ L_baba      <- lbeta(alpha_BABA,beta_BBAA) #(lgamma(alpha_BABA)*lgamma(beta_BBAA
 D_bayes             <- D
 D_bayes[D==0]       <- 1
 D_bayes[D >0]       <- 1 + exp((L_abba/L_baba)) - exp(1)
-D_bayes[D <0]       <- -(1 + exp((L_baba/L_abba)) - exp(1))
+D_bayes[D <0]       <- 1 + exp((L_baba/L_abba)) - exp(1)
 
 #D_bayes            <- sum_ABBA/sum_BABA
+df_theta <- D
+df_theta[D>=0] <-  (abs(alpha_ABBA/(alpha_ABBA+beta_BBAA))/0.5 - 1)
+df_theta[D<0]  <-  (abs(alpha_BABA/(alpha_BABA+beta_BBAA))/0.5 - 1)
 
 #-------------------------------------------
 
@@ -212,7 +219,6 @@ D_bayes[D <0]       <- -(1 + exp((L_baba/L_abba)) - exp(1))
 freqs23    <- freqs[2:3,,drop=FALSE]
 maxfreqs23 <- apply(freqs23,2,max)
 
-
 # f_d denominator
 maxBABA <- (d23 * p     + d13 * (1-maxfreqs23))  *maxfreqs23
 maxABBA <- (d23 * (1-p) + d13 * maxfreqs23)      *maxfreqs23
@@ -225,6 +231,12 @@ f <- (sum_ABBA - sum_BABA)/(sum_maxABBA - sum_maxBABA)
 #D3
 D3 <- (d23-d13)/(d23+d13)
 
-return(list(Bd_dir=Bd_dir, D=D, D_bayes=D_bayes, f=f, D_site=D_site, ABBA=ABBA_site, BABA=BABA_site, alpha_ABBA=alpha_ABBA, alpha_BABA=alpha_BABA, beta_BBAA=beta_BBAA,D3=D3))
+return(list(Bd_dir=Bd_dir, D=D, D_bayes=D_bayes, 
+f=f, D_site=D_site, 
+ABBA=ABBA_site, BABA=BABA_site, 
+alpha_ABBA=alpha_ABBA, alpha_BABA=alpha_BABA, 
+beta_BBAA=beta_BBAA,
+df_theta = df_theta,
+D3=D3))
 
 }

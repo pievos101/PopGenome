@@ -113,10 +113,12 @@ MDG1="matrix",
 MDG2="matrix",
 
 D		       =   "matrix",              # introgression slots
+Dp		       =   "matrix",              # introgression slots
 BD		       =   "matrix",              # introgression slots
 df		       =   "matrix",              # introgression slots
 D3		       =   "matrix",
 df_bayes	       =   "matrix",              # introgression slots
+df_theta	       =   "matrix",              # introgression slots
 alpha_ABBA	       =   "matrix",              # introgression slots
 alpha_BABA	       =   "matrix",              # introgression slots
 beta_BBAA	       =   "matrix",              # introgression slots
